@@ -21,6 +21,12 @@ Confluence Plug-in connects Smartsheet &amp; Confluence
 * cd smartsheetplugin
 * atlas-run
 
+# Browser / Client
+* http://localhost:1990/confluence
+
+# HOW-TO Reduce Build-Deploy Cycle Times  with QuickReload
+* https://developer.atlassian.com/docs/developer-tools/automatic-plugin-reinstallation-with-quickreload
+
 # Release
 * mvn release:prepare
 * mvn release:peform
