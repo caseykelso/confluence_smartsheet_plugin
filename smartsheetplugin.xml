@@ -4,7 +4,7 @@
    <remote name="github"
            fetch="ssh://github.com" />
 
-   <project name="caseykelso/confluence_smartsheet"         remote="github"  path="." revision="master" />  
+   <project name="caseykelso/confluence_smartsheet_plugin"  remote="github"  path="." revision="master" />  
    <project name="smartsheet-platform/smartsheet-java-sdk"  remote="github"  path="smartsheet-java-sdk" revision="master" />
 
 </manifest>
