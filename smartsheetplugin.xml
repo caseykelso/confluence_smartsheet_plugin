@@ -6,6 +6,6 @@
 
    <project name="caseykelso/confluence_smartsheet_plugin"  remote="github"  path="." revision="master" />  
    <project name="smartsheet-platform/smartsheet-java-sdk"  remote="github"  path="smartsheet-java-sdk" revision="master" />
-
+   <project name="apache/httpclient"                        remote="github"  path="httpclient" revision="4.5.x" />
 </manifest>
 
