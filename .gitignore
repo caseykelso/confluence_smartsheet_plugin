@@ -5,4 +5,5 @@ amps-standalone-refapp-LATEST/
 smartsheet-java-sdk
 *.iml
 build
+.ant-targets-build.xml
 
