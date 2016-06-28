@@ -21,7 +21,7 @@
 <target name="build_tools">
   <delete dir="${basedir}/build/classes" /> 
   <mkdir  dir="${basedir}/build/classes" />
-  <javac srcdir="tools" destdir="build/classes">
+  <javac includeantruntime="false" srcdir="tools" destdir="build/classes">
     <classpath>
         <pathelement path="${basedir}/smartsheet-java-sdk/target/smartsheet-sdk-java-2.0.4-with-dependencies.jar" />
     </classpath>     
