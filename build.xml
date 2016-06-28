@@ -9,4 +9,27 @@
   </exec>
 </target>
 
+<target name="package_tools">
+  <mkdir dir="build/jar" />
+  <jar destfile="build/jar/tools.jar" basedir="build/classes">
+     <manifest>
+        <attribute name="Main-Class" value="GetSheet" />
+     </manifest>
+  </jar>
+</target>
+
+<target name="build_tools">
+  <delete dir="${basedir}/build/classes" /> 
+  <mkdir  dir="${basedir}/build/classes" />
+  <javac srcdir="tools" destdir="build/classes">
+    <classpath>
+        <pathelement path="${basedir}/smartsheet-java-sdk/target/smartsheet-sdk-java-2.0.4-with-dependencies.jar" />
+    </classpath>     
+  </javac>
+</target>
+
+<target name="run_tools" depends="build_tools, package_tools" >
+  <java jar="build/jar/tools.jar" fork="true" />
+</target>
+
 </project>
