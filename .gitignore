@@ -1,4 +1,8 @@
 *.swp
 amps-standalone-refapp-LATEST/
+.idea
+.repo
+smartsheet-java-sdk
+*.iml
 
 
