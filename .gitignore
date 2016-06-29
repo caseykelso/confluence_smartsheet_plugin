@@ -8,3 +8,5 @@ build
 .ant-targets-build.xml
 smartsheet.properties
 target
+commons-cli
+
