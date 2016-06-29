@@ -6,13 +6,18 @@ import com.smartsheet.api.oauth.*;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Arrays;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
-public class GetSheet {
-
-    public static void getSheet() throws SmartsheetException{
+public class GetSheet 
+{
+    public static void getSheet(String smartsheetToken) throws SmartsheetException
+    {
         // Set the Access Token
         Token token = new Token();
-        token.setAccessToken("INSERT_YOUR_TOKEN_HERE");
+        token.setAccessToken(smartsheetToken);
 
         // Use the Smartsheet Builder to create a Smartsheet
         Smartsheet smartsheet = new SmartsheetBuilder().setAccessToken(token.getAccessToken()).build();
@@ -59,10 +64,40 @@ public class GetSheet {
         sheet = smartsheet.sheetResources().createSheet(sheet);
     }
 
+   
+   public static Properties getProperties() throws IOException
+   {
+
+       Properties prop   = new Properties();
+       InputStream input = new FileInputStream("smartsheet.properties");
+       prop.load(input);
+
+       return prop; 
+   }
 
     public static void main(String args[])
     {
-        System.out.println("Yo");
+        Properties props = null;
+
+        try
+        {
+           props = getProperties();
+        }
+        catch (IOException e)
+        { 
+          System.err.println("getProperties Exception: " + e.getMessage());
+          System.exit(1);
+        }        
+   
+        try 
+        { 
+           GetSheet.getSheet(props.getProperty("apitoken")); 
+        }
+        catch (Exception e)
+        {
+           System.err.println("SmartSheetException: " + e.getMessage()); 
+           System.exit(2);
+        }
     }
 
 };
