@@ -2,12 +2,14 @@
 <property name="target.dir"            value="${basedir}/target" />
 <property name="build.dir"             value="${basedir}/build" />
 <property name="jar.dir"               value="${build.dir}/jar" />
+<property name="cli.dir"               value="${basedir}/commons-cli" />
 <property name="smartsheet.dir"        value="${basedir}/smartsheet-java-sdk" />
 <property name="plugin.dir"            value="${basedir}/smartsheetplugin" />
 <property name="tools.jar"             value="${build.dir}/jar/tools.jar" />
 <property name="smartsheet.jar"        value="${smartsheet.dir}/target/smartsheet-sdk-java-2.0.4-with-dependencies.jar"  />
 <property name="smartsheetplugin.jar"  value="${plugin.dir}/target/smartsheetplugin-0.1.jar" />
 <property name="target.jar"            value="${target.dir}/target.jar" /> <!-- needs to be renamed -->
+<property name="cli.jar"               value="${cli.dir}/target/commons-cli-1.4-SNAPSHOT.jar" />
 
 <target name="all" depends="smartsheet_sdk, build_plugin, package_plugin, build_tools, package_target" >
 </target>
@@ -39,7 +41,7 @@
 
   <jar destfile="${tools.jar}" basedir="build/classes">
      <manifest>
-        <attribute name="Main-Class" value="GetSheet" />
+        <attribute name="Main-Class" value="SmartsheetCLI" />
      </manifest>
   </jar>
 
@@ -47,18 +49,21 @@
     <copy file="${smartsheet.jar}"        todir="${target.dir}" />
 <!--    <copy file="${smartsheetplugin.jar}"  todir="${target.dir}" /> -->
     <copy file="${tools.jar}"             todir="${target.dir}" />
+    <copy file="${cli.jar}"               todir="${target.dir}" />
 
     <jar destfile="${target.jar}">
       <zipgroupfileset dir="${target.dir}" includes="*.jar" /> 
         <manifest>
-            <attribute name="Main-Class" value="GetSheet"/>
+            <attribute name="Main-Class" value="SmartsheetCLI"/>
         </manifest>
     </jar> 
 
 </target>
 
 <target name="commons-cli">
-
+  <exec failonerror="true" executable="mvn" dir="${cli.dir}">
+    <arg value="install" />
+  </exec>
 </target>
 
 <target name="build_tools">
@@ -67,6 +72,7 @@
   <javac includeantruntime="false" srcdir="tools" destdir="build/classes">
     <classpath>
         <pathelement path="${smartsheet.jar}" />
+        <pathelement path="${cli.jar}" />
     </classpath>     
   </javac>
 </target>

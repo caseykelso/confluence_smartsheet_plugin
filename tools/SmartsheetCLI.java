@@ -10,8 +10,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import org.apache.commons.cli.Options;  //apache commons cli examples https://commons.apache.org/proper/commons-cli/usage.html
 
-public class GetSheet 
+public class SmartsheetCLI 
 {
     public static void getSheet(String smartsheetToken) throws SmartsheetException
     {
@@ -37,33 +38,14 @@ public class GetSheet
             System.out.println("sheet: " + sheet.getName());
         }
 
-        // Create folder in home
-        Folder folder = new Folder.CreateFolderBuilder().setName("New Folder").build();
-        folder = smartsheet.homeResources().folderResources().createFolder(folder);
-        System.out.println("Folder ID: " + folder.getId() + ", Folder Name: " + folder.getName());
+   }
 
-        // Setup checkbox Column Object
-        Column checkboxColumn = new Column.AddColumnToSheetBuilder()
-                .setType(ColumnType.CHECKBOX)
-                .setTitle("Finished")
-                .build();
-        // Setup text Column Object
-        Column textColumn = new Column.AddColumnToSheetBuilder()
-                .setPrimary(true)
-                .setTitle("To Do List")
-                .setType(ColumnType.TEXT_NUMBER)
-                .build();
-
-        // Add the 2 Columns (flag & text) to a new Sheet Object
-        Sheet sheet = new Sheet.CreateSheetBuilder()
-                .setName("New Sheet")
-                .setColumns(Arrays.asList(checkboxColumn, textColumn))
-                .build();
-
-        // Send the request to create the sheet @ Smartsheet
-        sheet = smartsheet.sheetResources().createSheet(sheet);
-    }
-
+   public static Options setupCommandLine()
+   {
+       Options options = new Options();
+       options.addOption("h", false, "show help");  
+       return options;
+   }
    
    public static Properties getProperties() throws IOException
    {
@@ -77,7 +59,10 @@ public class GetSheet
 
     public static void main(String args[])
     {
-        Properties props = null;
+        Properties props   = null;
+        Options    options = null;
+
+        options = setupCommandLine();
 
         try
         {
@@ -91,7 +76,7 @@ public class GetSheet
    
         try 
         { 
-           GetSheet.getSheet(props.getProperty("apitoken")); 
+           SmartsheetCLI.getSheet(props.getProperty("apitoken")); 
         }
         catch (Exception e)
         {
