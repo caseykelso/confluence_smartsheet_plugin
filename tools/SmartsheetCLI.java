@@ -19,7 +19,7 @@ import org.apache.commons.cli.ParseException;
 
 public class SmartsheetCLI 
 {
-    public static void getSheet(String smartsheetToken) throws SmartsheetException
+    public static void getSheets(String smartsheetToken) throws SmartsheetException
     {
         // Set the Access Token
         Token token = new Token();
@@ -45,6 +45,21 @@ public class SmartsheetCLI
 
    }
 
+   public static void getSheet(String smartsheetToken, int sheetID) throws SmartsheetException
+   {
+        // Set the Access Token
+        Token token = new Token();
+        token.setAccessToken(smartsheetToken);
+
+        // Use the Smartsheet Builder to create a Smartsheet
+        Smartsheet smartsheet = new SmartsheetBuilder().setAccessToken(token.getAccessToken()).build();
+
+        // Get home with Source Inclusion parameter
+        Home home = smartsheet.homeResources().getHome(EnumSet.of(SourceInclusion.SOURCE));
+
+        //TODO: query for sheet w/ sheet id == sheetID
+   }
+
    public static Options setupCommandLine()
    {
        Options options = new Options();
@@ -64,6 +79,12 @@ public class SmartsheetCLI
        return prop; 
    }
 
+   public static void showHelp(Options options)
+   {
+       HelpFormatter formatter = new HelpFormatter();
+       formatter.printHelp( "target", options);
+   }
+
     public static void main(String args[])
     {
         Properties props           = null;
@@ -78,7 +99,7 @@ public class SmartsheetCLI
         }
         catch (ParseException e)
         {
-            System.err.println("CommandLine parse Exception: " + e.getMessage());
+            SmartsheetCLI.showHelp(options);
             System.exit(3); // change this to show help
         }
 
@@ -96,7 +117,7 @@ public class SmartsheetCLI
         {   
 		try 
 		{ 
-		   SmartsheetCLI.getSheet(props.getProperty("apitoken")); 
+		   SmartsheetCLI.getSheets(props.getProperty("apitoken")); 
 		}
 		catch (Exception e)
 		{
@@ -106,8 +127,7 @@ public class SmartsheetCLI
         } 
         else if (cl.hasOption("h"))
         {
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp( "target", options);
+            SmartsheetCLI.showHelp(options);
         }
 
 
