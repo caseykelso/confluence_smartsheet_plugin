@@ -9,13 +9,8 @@ Confluence Plug-in connects Smartsheet &amp; Confluence
 * repo init -m smartsheetplugin.xml -u git://github.com/caseykelso/confluence_smartsheet_plugin
 * repo sync
 
-# Build
-* cd smartsheetplugin
-* atlas-compile
-
-# Package
-* cd smartsheetplugin
-* atlas-package
+# Build & Package
+ant plugin
 
 # Start-up Dev Environment
 * cd smartsheetplugin
