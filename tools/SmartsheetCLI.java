@@ -11,6 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import org.apache.commons.cli.Options;  //apache commons cli examples https://commons.apache.org/proper/commons-cli/usage.html
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.ParseException;
 
 public class SmartsheetCLI 
 {
@@ -44,8 +49,10 @@ public class SmartsheetCLI
    {
        Options options = new Options();
        options.addOption("h", false, "show help");  
+       options.addOption("s", false, "show sheets");
        return options;
    }
+
    
    public static Properties getProperties() throws IOException
    {
@@ -59,10 +66,21 @@ public class SmartsheetCLI
 
     public static void main(String args[])
     {
-        Properties props   = null;
-        Options    options = null;
+        Properties props           = null;
+        Options    options         = null;
+        CommandLine cl             = null;
 
         options = setupCommandLine();
+        CommandLineParser clparser = new DefaultParser();
+        try
+        {
+            cl = clparser.parse(options, args);
+        }
+        catch (ParseException e)
+        {
+            System.err.println("CommandLine parse Exception: " + e.getMessage());
+            System.exit(3); // change this to show help
+        }
 
         try
         {
@@ -73,16 +91,26 @@ public class SmartsheetCLI
           System.err.println("getProperties Exception: " + e.getMessage());
           System.exit(1);
         }        
-   
-        try 
-        { 
-           SmartsheetCLI.getSheet(props.getProperty("apitoken")); 
-        }
-        catch (Exception e)
+
+        if (cl.hasOption("s"))
+        {   
+		try 
+		{ 
+		   SmartsheetCLI.getSheet(props.getProperty("apitoken")); 
+		}
+		catch (Exception e)
+		{
+		   System.err.println("SmartSheetException: " + e.getMessage()); 
+		   System.exit(2);
+		}
+        } 
+        else if (cl.hasOption("h"))
         {
-           System.err.println("SmartSheetException: " + e.getMessage()); 
-           System.exit(2);
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp( "target", options);
         }
+
+
     }
 
 };
