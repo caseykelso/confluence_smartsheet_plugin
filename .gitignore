@@ -6,4 +6,5 @@ smartsheet-java-sdk
 *.iml
 build
 .ant-targets-build.xml
-
+smartsheet.properties
+target
