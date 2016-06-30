@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Arrays;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.Charset;
 import java.util.Properties;
 import org.apache.commons.cli.Options;  //apache commons cli examples https://commons.apache.org/proper/commons-cli/usage.html
 import org.apache.commons.cli.CommandLine;
@@ -19,7 +22,7 @@ import org.apache.commons.cli.ParseException;
 
 public class SmartsheetCLI 
 {
-    public static void getSheets(String smartsheetToken) throws SmartsheetException
+    public static PagedResult<Sheet> getSheets(String smartsheetToken) throws SmartsheetException
     {
         // Set the Access Token
         Token token = new Token();
@@ -33,19 +36,28 @@ public class SmartsheetCLI
 
         // List home folders
         List<Folder> homeFolders = home.getFolders();
-        for(Folder folder : homeFolders){
+
+        for(Folder folder : homeFolders)
+        {
             System.out.println("folder:"+folder.getName());
         }
 
         //List Sheets with Source Inclusion parameters and null Pagination parameters
         PagedResult<Sheet> homeSheets = smartsheet.sheetResources().listSheets(EnumSet.of(SourceInclusion.SOURCE), null);
-        for(Sheet sheet : homeSheets.getData()){
-            System.out.println("sheet: " + sheet.getName());
-        }
+
+        return homeSheets;
 
    }
 
-   public static void getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
+   public static void renderSheets(PagedResult<Sheet> homeSheets)
+   {
+        for(Sheet sheet : homeSheets.getData())
+        {
+            System.out.println("sheet: " + sheet.getName());
+        }
+   }
+
+   public static Sheet getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
    {
         // Set the Access Token
         Token token = new Token();
@@ -57,12 +69,24 @@ public class SmartsheetCLI
         // Get home with Source Inclusion parameter
         Home home = smartsheet.homeResources().getHome(EnumSet.of(SourceInclusion.SOURCE));
 
-        Sheet s = smartsheet.sheetResources().getSheet(sheetID, null, null, null, null, null, null, null);
+        return smartsheet.sheetResources().getSheet(sheetID, null, null, null, null, null, null, null);
+       
+   }
 
+   public static void renderSheet(Sheet s)
+   {
         if (null != s)
         {
            System.out.println("sheet name: " + s.getName());
         }
+
+   }
+
+   public static String renderHTMLSheet(Sheet s)
+   {
+        String output = "";
+
+        return output;
    }
 
    public static Options setupCommandLine()
@@ -123,7 +147,7 @@ public class SmartsheetCLI
         {   
 		try 
 		{ 
-		   SmartsheetCLI.getSheets(props.getProperty("apitoken")); 
+		   renderSheets(SmartsheetCLI.getSheets(props.getProperty("apitoken")));
 		}
 		catch (Exception e)
 		{
@@ -135,7 +159,7 @@ public class SmartsheetCLI
         {   
 		try 
 		{ 
-		   SmartsheetCLI.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))); 
+		   renderSheet(SmartsheetCLI.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))));
 		}
 		catch (Exception e)
 		{
