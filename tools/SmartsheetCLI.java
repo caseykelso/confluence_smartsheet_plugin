@@ -45,7 +45,7 @@ public class SmartsheetCLI
 
    }
 
-   public static void getSheet(String smartsheetToken, int sheetID) throws SmartsheetException
+   public static void getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
    {
         // Set the Access Token
         Token token = new Token();
@@ -57,14 +57,20 @@ public class SmartsheetCLI
         // Get home with Source Inclusion parameter
         Home home = smartsheet.homeResources().getHome(EnumSet.of(SourceInclusion.SOURCE));
 
-        //TODO: query for sheet w/ sheet id == sheetID
+        Sheet s = smartsheet.sheetResources().getSheet(sheetID, null, null, null, null, null, null, null);
+
+        if (null != s)
+        {
+           System.out.println("sheet name: " + s.getName());
+        }
    }
 
    public static Options setupCommandLine()
    {
        Options options = new Options();
-       options.addOption("h", false, "show help");  
-       options.addOption("s", false, "show sheets");
+       options.addOption("h", "help", false, "show help");  
+       options.addOption("as", "allsheets", false, "show sheets");
+       options.addOption("s", "sheet", true, "show sheet");
        return options;
    }
 
@@ -113,7 +119,7 @@ public class SmartsheetCLI
           System.exit(1);
         }        
 
-        if (cl.hasOption("s"))
+        if (cl.hasOption("allsheets"))
         {   
 		try 
 		{ 
@@ -125,7 +131,20 @@ public class SmartsheetCLI
 		   System.exit(2);
 		}
         } 
-        else if (cl.hasOption("h"))
+        else if (cl.hasOption("sheet") && (null != cl.getOptionValue("sheet")))
+        {   
+		try 
+		{ 
+		   SmartsheetCLI.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))); 
+		}
+		catch (Exception e)
+		{
+		   System.err.println("SmartSheetException: " + e.getMessage()); 
+		   System.exit(2);
+		}
+        } 
+ 
+        else if (cl.hasOption("help"))
         {
             SmartsheetCLI.showHelp(options);
         }
