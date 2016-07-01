@@ -10,3 +10,4 @@ smartsheet.properties
 target
 commons-cli
 jsoup
+*.html
