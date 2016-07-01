@@ -100,6 +100,17 @@ public class SmartsheetCLI
       row.attr("scope", "row");
       Element  row_number         = new Element(Tag.valueOf("th"), "");
       row_number.appendText(smartsheetRow.getRowNumber().toString());
+
+      if (null != smartsheetRow.getParentId()) 
+      {
+        row_number.appendText(","+smartsheetRow.getParentId().toString());
+        row_number.attr("class", "level-1");
+      }
+      else
+      {
+        row_number.attr("class", "level-0");
+      }
+
       row.appendChild(row_number);
 
       try {
@@ -191,7 +202,10 @@ public class SmartsheetCLI
        + "<!-- Optional theme -->"
        + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
        + "<!-- Latest compiled and minified JavaScript -->"
-       + "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>";
+       + "<script   src=\"https://code.jquery.com/jquery-2.2.4.min.js\"   integrity=\"sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=\"   crossorigin=\"anonymous\"></script>"
+       + "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\">"
+       + ".level-1 > th { padding-left: 1em; }"
+       + "</script>";
       
        return cdns;
    }
