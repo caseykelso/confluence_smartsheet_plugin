@@ -7,6 +7,10 @@
         <param name="plugin-logo">images/pluginLogo.png</param>
     </plugin-info>
 
+    <xhtml-macro name="confluence-smartsheet-macro" class="com.caseykelso.confluence.SmartsheetMacro" key="smartsheet">
+        <parameters/>
+    </xhtml-macro>
+
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="smartsheetplugin"/>
     
@@ -20,5 +24,7 @@
 
         <context>smartsheetplugin</context>
     </web-resource>
-    
+   
+
+     
 </atlassian-plugin>
