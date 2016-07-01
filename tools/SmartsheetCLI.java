@@ -22,6 +22,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.DataNode;
 import org.jsoup.parser.Tag;
 
 
@@ -107,8 +108,17 @@ public class SmartsheetCLI
       for (Cell smartsheetCell : smartsheetCells)
       {
          Element  column    = new Element(Tag.valueOf("td"), "");
-         column.appendText(smartsheetCell.getValue().toString());
-         row.appendChild(column);       // add column to row
+
+         if (null != smartsheetCell.getValue())
+         {
+           column.appendText(smartsheetCell.getValue().toString());
+         }
+         else
+         {
+           column.appendText("-");
+         }
+
+           row.appendChild(column);       // add column to row
       }
       
       }
@@ -181,7 +191,7 @@ public class SmartsheetCLI
        + "<!-- Optional theme -->"
        + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
        + "<!-- Latest compiled and minified JavaScript -->"
-       + "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>\");";
+       + "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>";
       
        return cdns;
    }
@@ -190,8 +200,13 @@ public class SmartsheetCLI
    public static String renderSheetHTML(Sheet s)
    {
         Document doc       = Document.createShell("");
-        Element  headline  = doc.body().appendElement("h1").text(s.getName());
+        
+        DataNode script    = new DataNode("script", "");
+        script.setWholeData(renderCDNs());
+        doc.head().appendChild(script);
 
+        Element  headline  = doc.body().appendElement("h1").text(s.getName());
+        
         doc.body().appendChild(renderTable(s)); // add table to html body
 
         return doc.html();
