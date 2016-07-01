@@ -3,6 +3,7 @@
 <property name="build.dir"             value="${basedir}/build" />
 <property name="jar.dir"               value="${build.dir}/jar" />
 <property name="cli.dir"               value="${basedir}/commons-cli" />
+<property name="jsoup.dir"             value="${basedir}/jsoup" />
 <property name="smartsheet.dir"        value="${basedir}/smartsheet-java-sdk" />
 <property name="plugin.dir"            value="${basedir}/smartsheetplugin" />
 <property name="tools.jar"             value="${build.dir}/jar/tools.jar" />
@@ -10,13 +11,20 @@
 <property name="smartsheetplugin.jar"  value="${plugin.dir}/target/smartsheetplugin-0.1.jar" />
 <property name="target.jar"            value="${target.dir}/target.jar" /> <!-- needs to be renamed -->
 <property name="cli.jar"               value="${cli.dir}/target/commons-cli-1.4-SNAPSHOT.jar" />
+<property name="jsoup.jar"             value="${jsoup.dir}/target/jsoup-1.9.3-SNAPSHOT.jar" />
 
-<target name="all" depends="smartsheet_sdk, build_plugin, package_plugin, build_tools, package_target" >
+<target name="all" depends="smartsheet_sdk, jsoup, build_plugin, package_plugin, build_tools, package_target" >
 </target>
 
 <target name="smartsheet_sdk">
   <exec failonerror="true" executable="mvn" dir="${basedir}/smartsheet-java-sdk">
     <arg value="package" />
+  </exec>
+</target>
+
+<target name="jsoup">
+  <exec failonerror="true" executable="mvn" dir="${jsoup.dir}">
+    <arg value="install" />
   </exec>
 </target>
 
@@ -40,15 +48,12 @@
   <mkdir  dir="${target.dir}" />
 
   <jar destfile="${tools.jar}" basedir="build/classes">
-     <manifest>
-        <attribute name="Main-Class" value="SmartsheetCLI" />
-     </manifest>
   </jar>
 
     
     <copy file="${smartsheet.jar}"        todir="${target.dir}" />
-<!--    <copy file="${smartsheetplugin.jar}"  todir="${target.dir}" /> -->
     <copy file="${tools.jar}"             todir="${target.dir}" />
+    <copy file="${jsoup.jar}"             todir="${target.dir}" />
     <copy file="${cli.jar}"               todir="${target.dir}" />
 
     <jar destfile="${target.jar}">
@@ -73,6 +78,7 @@
     <classpath>
         <pathelement path="${smartsheet.jar}" />
         <pathelement path="${cli.jar}" />
+        <pathelement path="${jsoup.jar}" />
     </classpath>     
   </javac>
 </target>
