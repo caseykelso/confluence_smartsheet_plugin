@@ -6,6 +6,7 @@ import com.smartsheet.api.oauth.*;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,6 +29,8 @@ import org.jsoup.parser.Tag;
 
 public class SmartsheetCLI 
 {
+
+
     public static PagedResult<Sheet> getSheets(String smartsheetToken) throws SmartsheetException
     {
         // Set the Access Token
@@ -63,6 +66,7 @@ public class SmartsheetCLI
         }
    }
 
+  
    public static Sheet getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
    {
         // Set the Access Token
@@ -94,7 +98,9 @@ public class SmartsheetCLI
       Element  row                = new Element(Tag.valueOf("tr"), "");  
       row.attr("scope", "row");
       Element  row_number         = new Element(Tag.valueOf("th"), "");
-//      row_number.appendText(smartsheetRow.
+      row_number.appendText(smartsheetRow.getRowNumber().toString());
+      row.appendChild(row_number);
+
       try {
       List<Cell> smartsheetCells  = smartsheetRow.getCells();
 
@@ -114,10 +120,49 @@ public class SmartsheetCLI
       return row; 
    }
 
+   private static Element renderTableHeader(Sheet s)
+   {
+
+     final List<String> activeColumnNames = new ArrayList<String>() {{
+         add("RYG");
+         add("Task Name");
+         add("Start");
+         add("Finish");
+         add("Status");
+         add("Assigned To");
+//         add("Comments");
+//         add("Predecessors");
+     }};
+
+      Element tableHeader = new Element(Tag.valueOf("thead"), "");
+      Element row         = new Element(Tag.valueOf("tr"), "");
+      
+      List<Column> columns = s.getColumns();
+         
+      Element rownumberColumn = new Element(Tag.valueOf("th"), "");
+      rownumberColumn.appendText("Row Number");
+      tableHeader.appendChild(rownumberColumn);    
+ 
+      for (Column c : columns)
+      {
+         if (activeColumnNames.contains(c.getTitle().toString()))
+         {
+		 Element column = new Element(Tag.valueOf("th"), "");
+		 column.appendText(c.getTitle().toString());
+		 tableHeader.appendChild(column);
+         }
+      }
+
+      tableHeader.appendChild(row);
+      return tableHeader;
+   }
+
    private static Element renderTable(Sheet s)
    {
       Element  table     = new Element(Tag.valueOf("table"), ""); 
       table.attr("class", "table");
+      table.appendChild(renderTableHeader(s));
+
       List<Row> rows     = s.getRows(); 
 
       for (Row r : rows)
@@ -140,7 +185,8 @@ public class SmartsheetCLI
       
        return cdns;
    }
- 
+  
+   
    public static String renderSheetHTML(Sheet s)
    {
         Document doc       = Document.createShell("");
