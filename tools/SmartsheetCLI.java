@@ -19,6 +19,12 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
+
+
+
 
 public class SmartsheetCLI 
 {
@@ -82,11 +88,67 @@ public class SmartsheetCLI
 
    }
 
-   public static String renderHTMLSheet(Sheet s)
+   private static Element renderRow(Row smartsheetRow)
    {
-        String output = "";
+      
+      Element  row                = new Element(Tag.valueOf("tr"), "");  
+      row.attr("scope", "row");
+      Element  row_number         = new Element(Tag.valueOf("th"), "");
+//      row_number.appendText(smartsheetRow.
+      try {
+      List<Cell> smartsheetCells  = smartsheetRow.getCells();
 
-        return output;
+      for (Cell smartsheetCell : smartsheetCells)
+      {
+         Element  column    = new Element(Tag.valueOf("td"), "");
+         column.appendText(smartsheetCell.getValue().toString());
+         row.appendChild(column);       // add column to row
+      }
+      
+      }
+      catch(Exception e)
+      {
+//          System.err.println("renderRow Exception: " + e.getMessage());
+      }
+ 
+      return row; 
+   }
+
+   private static Element renderTable(Sheet s)
+   {
+      Element  table     = new Element(Tag.valueOf("table"), ""); 
+      table.attr("class", "table");
+      List<Row> rows     = s.getRows(); 
+
+      for (Row r : rows)
+      {
+          table.appendChild(renderRow(r));
+      }
+
+      return table;
+   }
+
+   public static String renderCDNs()
+   {
+       String cdns = ""
+       + "<!-- Latest compiled and minified CSS -->"
+       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">"
+       + "<!-- Optional theme -->"
+       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
+       + "<!-- Latest compiled and minified JavaScript -->"
+       + "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>\");";
+      
+       return cdns;
+   }
+ 
+   public static String renderSheetHTML(Sheet s)
+   {
+        Document doc       = Document.createShell("");
+        Element  headline  = doc.body().appendElement("h1").text(s.getName());
+
+        doc.body().appendChild(renderTable(s)); // add table to html body
+
+        return doc.html();
    }
 
    public static Options setupCommandLine()
@@ -159,7 +221,9 @@ public class SmartsheetCLI
         {   
 		try 
 		{ 
-		   renderSheet(SmartsheetCLI.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))));
+                   String html = "";
+		   html = renderSheetHTML(SmartsheetCLI.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))));
+                   System.out.println(html);
 		}
 		catch (Exception e)
 		{
