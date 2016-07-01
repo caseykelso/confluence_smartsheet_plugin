@@ -30,17 +30,19 @@
 
 <target name="build_plugin">
  <delete dir="${build.dir}" />
+ <delete dir="${basedir}/smartsheetplugin/target" />
  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-compile" />
 </target>
 
-<target name="package_plugin">
+
+<target name="package_plugin" depends="build_plugin" >
  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-package" />
 </target>
 
 <target name="plugin" depends="build_plugin, package_plugin" >
 </target>
 
-<target name="confluence">
+<target name="confluence" depends="package_plugin">
   <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-run">
     <arg value="--jvmargs" />
     <arg value="'-Xmx8192m" />
