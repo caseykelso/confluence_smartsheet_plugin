@@ -40,6 +40,14 @@
 <target name="plugin" depends="build_plugin, package_plugin" >
 </target>
 
+<target name="confluence">
+  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-run">
+    <arg value="--jvmargs" />
+    <arg value="'-Xmx8192m" />
+    <arg value="-Xms4096m'" />
+  </exec>
+</target>
+
 <target name="package_target">
 
   <delete dir="${jar.dir}" />
