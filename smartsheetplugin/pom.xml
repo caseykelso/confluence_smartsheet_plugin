@@ -3,7 +3,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<!--
+<repositories>
+    <repository>
+      <id>java.net</id>
+      <url>https://maven.java.net/content/repositories/public/</url>
+    </repository>
+ </repositories>
+-->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.caseykelso.confluence</groupId>
     <artifactId>smartsheetplugin</artifactId>
@@ -19,12 +26,13 @@
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
-        <dependency>
+       <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.atlassian.confluence</groupId>
             <artifactId>confluence</artifactId>
@@ -38,6 +46,14 @@
             <version>${atlassian.spring.scanner.version}</version>
             <scope>compile</scope>
         </dependency>
+<!--
+        <dependency> 
+          <groupId>com.smartsheet</groupId>
+          <artifactId>smartsheet-sdk-java</artifactId>
+          <version>2.0.4</version>
+          <scope>compile</scope>
+        </dependency>
+--> 
 
         <dependency>
             <groupId>com.atlassian.plugin</groupId>

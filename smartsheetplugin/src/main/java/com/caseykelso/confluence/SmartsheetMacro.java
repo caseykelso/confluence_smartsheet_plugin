@@ -11,6 +11,13 @@ import com.atlassian.confluence.xhtml.api.MacroDefinitionHandler;
 import com.atlassian.confluence.xhtml.api.XhtmlContent;
 import com.atlassian.confluence.content.render.xhtml.XhtmlException;
 
+/*
+import com.smartsheet.api.*;
+import com.smartsheet.api.models.*;
+import com.smartsheet.api.models.enums.SourceInclusion;
+import com.smartsheet.api.models.enums.ColumnType;
+import com.smartsheet.api.oauth.*;
+*/
 public class SmartsheetMacro implements Macro 
 {
 
