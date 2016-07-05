@@ -3,14 +3,64 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-<!--
-<repositories>
+
+  <repositories>
     <repository>
-      <id>java.net</id>
-      <url>https://maven.java.net/content/repositories/public/</url>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <layout>default</layout>
+      <url>http://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
- </repositories>
--->
+
+    <repository>
+      <id>atlassian-public</id>
+      <url>https://maven.atlassian.com/repository/public</url>
+      <snapshots>
+	<enabled>true</enabled>
+	<updatePolicy>never</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+       <releases>
+         <enabled>true</enabled>
+         <checksumPolicy>warn</checksumPolicy>
+      </releases>
+    </repository>
+
+  </repositories>
+ 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <name>Maven Plugin Repository</name>
+      <url>http://repo1.maven.org/maven2</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>atlassian-public</id>
+      <url>https://maven.atlassian.com/repository/public</url>
+      <snapshots>
+	<enabled>true</enabled>
+	<updatePolicy>never</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+       <releases>
+         <enabled>true</enabled>
+         <checksumPolicy>warn</checksumPolicy>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.caseykelso.confluence</groupId>
     <artifactId>smartsheetplugin</artifactId>
@@ -46,14 +96,80 @@
             <version>${atlassian.spring.scanner.version}</version>
             <scope>compile</scope>
         </dependency>
-<!--
+
         <dependency> 
           <groupId>com.smartsheet</groupId>
           <artifactId>smartsheet-sdk-java</artifactId>
           <version>2.0.4</version>
           <scope>compile</scope>
         </dependency>
---> 
+
+        <dependency> 
+          <groupId>org.jsoup</groupId>
+          <artifactId>jsoup</artifactId>
+          <version>1.9.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.5</version>
+	    <scope>compile</scope>
+	</dependency>
+
+        <dependency> 
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+          <version>2.6.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+<dependency>
+    <groupId>org.apache.avalon.framework</groupId>
+    <artifactId>avalon-framework-api</artifactId>
+    <version>4.3.1</version>
+</dependency>
+
+<dependency>
+    <groupId>commons-logging</groupId>
+    <artifactId>commons-logging</artifactId>
+    <version>1.1.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.felix</groupId>
+    <artifactId>org.apache.felix.log</artifactId>
+    <version>1.0.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.microemu</groupId>
+    <artifactId>microemulator</artifactId>
+    <version>2.0.4</version>
+</dependency>
+
+        <dependency> 
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.6.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+        <dependency> 
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.6.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-parent</artifactId>
+	    <version>1.7.21</version>
+	    <type>pom</type>
+	    <scope>compile</scope>
+	</dependency>
 
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
