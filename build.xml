@@ -26,6 +26,7 @@
 <target name="jsoup">
   <exec failonerror="true" executable="mvn" dir="${jsoup.dir}">
     <arg value="install" />
+    <arg value="-Dmaven.test.skip=true" />
   </exec>
 </target>
 
@@ -79,6 +80,7 @@
 <target name="commons-cli">
   <exec failonerror="true" executable="mvn" dir="${cli.dir}">
     <arg value="install" />
+    <arg value="-Dmaven.test.skip=true" />
   </exec>
 </target>
 
