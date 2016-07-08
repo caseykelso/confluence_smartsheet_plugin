@@ -19,6 +19,7 @@
 <target name="smartsheet_sdk">
   <exec failonerror="true" executable="mvn" dir="${basedir}/smartsheet-java-sdk">
     <arg value="package" />
+    <arg value="-Dmaven.test.skip=true" />
   </exec>
 </target>
 
