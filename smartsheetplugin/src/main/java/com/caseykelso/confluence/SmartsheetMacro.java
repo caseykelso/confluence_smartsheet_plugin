@@ -135,7 +135,15 @@ public class SmartsheetMacro implements Macro
                  }  
                  else  
                  {
-		     column.appendText(smartsheetCell.getValue().toString());
+                     try 
+                     {
+		        column.appendText(smartsheetCell.getDisplayValue());
+                     }
+                     catch (Exception e)
+                     {
+        	        column.appendText(smartsheetCell.getValue().toString());
+                     }
+
                  }
 	     }
 	     else
@@ -200,7 +208,7 @@ public class SmartsheetMacro implements Macro
    private static Element renderTable(Sheet s, String tagFilter, List<String> activeColumnNames)
    {
       Element  table     = new Element(Tag.valueOf("table"), ""); 
-      table.attr("class", "table");
+      table.attr("class", "table table-striped table-hover");
       table.appendChild(renderTableHeader(s, activeColumnNames));
 
       List<Row> rows     = s.getRows(); 
@@ -229,6 +237,11 @@ public class SmartsheetMacro implements Macro
        + "<script   src=\"https://code.jquery.com/jquery-2.2.4.min.js\"   integrity=\"sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=\"   crossorigin=\"anonymous\"></script>"
        + "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\">"
        + ".level-1 > th { padding-left: 1em; }"
+       + "td { padding: 5px; }"
+       + "table { "
+       + "border-spacing: 10px;"
+       + "border-collapse: separate; "
+       + "}"
        + "</script>";
       
        return cdns;
@@ -241,7 +254,7 @@ public class SmartsheetMacro implements Macro
         
         DataNode script    = new DataNode("script", "");
         script.setWholeData(renderCDNs());
-        doc.head().appendChild(script);
+        doc.body().appendChild(script);
 
         Element  headline  = doc.body().appendElement("h1").text(s.getName());
         
