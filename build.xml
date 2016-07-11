@@ -16,6 +16,16 @@
 <target name="all" depends="smartsheet_sdk, commons-cli, jsoup, build_plugin, package_plugin, build_tools, package_target" >
 </target>
 
+<target name="release">
+  <exec failonerror="true" executable="atlas-mvn" dir="${plugin.dir}">
+    <arg value="release:prepare" />
+  </exec>
+
+  <exec failonerror="true" executable="atlas-mvn" dir="${plugin.dir}">
+    <arg value="release:perform" />
+  </exec>
+</target>
+
 <target name="smartsheet_sdk">
   <exec failonerror="true" executable="mvn" dir="${basedir}/smartsheet-java-sdk">
     <arg value="package" />

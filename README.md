@@ -28,7 +28,11 @@ ant plugin
 # HOW-TO Reduce Build-Deploy Cycle Times  with QuickReload
 * https://developer.atlassian.com/docs/developer-tools/automatic-plugin-reinstallation-with-quickreload
 
+# Rev Version
+cd smartsheetplugin
+atlas-mvn versions:set DnewVersion=x.y
+
 # Release
-* mvn release:prepare
-* mvn release:peform
+ant release
+
 

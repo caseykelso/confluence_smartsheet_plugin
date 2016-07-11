@@ -64,43 +64,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.caseykelso.confluence</groupId>
     <artifactId>smartsheetplugin</artifactId>
-    <version>0.2</version>
-
-	<issueManagement>
-		<url>https://github.com/kevinsawicki/github-maven-example/issues</url>
-		<system>GitHub Issues</system>
-	</issueManagement>
-
-	<licenses>
-		<license>
-			<name>MIT License</name>
-			<url>http://www.opensource.org/licenses/mit-license.php</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<scm>
-		<url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
-		<connection>scm:git:git://github.com/caseykelso/confluence_smartsheet_plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:caseykelso/confluence_smartsheet_plugin.git</developerConnection>
-	</scm>
-
-	<developers>
-		<developer>
-			<email></email>
-			<name>Casey Kelso</name>
-			<url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
-			<id>caseykelso</id>
-		</developer>
-	</developers>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <version>0.1</version>
 
     <organization>
-        <name>.</name>
-        <url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
+        <name>Example Company</name>
+        <url>http://www.example.com/</url>
     </organization>
 
     <name>smartsheetplugin</name>
@@ -129,6 +97,16 @@
             <scope>compile</scope>
         </dependency>
 
+<!--
+	<dependency>
+	    <groupId>org.apache.avalon.framework</groupId>
+	    <artifactId>avalon-framework-api</artifactId>
+	    <version>4.3.1</version>
+	</dependency>
+
+-->
+
+
 	<dependency>
 	    <groupId>commons-logging</groupId>
 	    <artifactId>commons-logging</artifactId>
@@ -149,6 +127,65 @@
           <scope>compile</scope>
         </dependency>
 
+ 
+<!--
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.5</version>
+	    <scope>compile</scope>
+	</dependency>
+
+        <dependency> 
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+          <version>2.6.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+    <dependency>
+        <groupId>javafx</groupId>
+        <artifactId>jfxrt</artifactId>
+        <version>[2.2,)</version>
+        <scope>system</scope>
+        <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
+    </dependency>
+
+
+<dependency>
+    <groupId>org.apache.felix</groupId>
+    <artifactId>org.apache.felix.log</artifactId>
+    <version>1.0.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.microemu</groupId>
+    <artifactId>microemulator</artifactId>
+    <version>2.0.4</version>
+</dependency>
+
+        <dependency> 
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.6.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+        <dependency> 
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.6.2</version>
+          <scope>compile</scope>
+        </dependency>
+
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-parent</artifactId>
+	    <version>1.7.21</version>
+	    <type>pom</type>
+	    <scope>compile</scope>
+	</dependency>
+-->
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-runtime</artifactId>
