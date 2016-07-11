@@ -11,3 +11,5 @@ target
 commons-cli
 jsoup
 *.html
+.DS_Store
+*DS_Store*
