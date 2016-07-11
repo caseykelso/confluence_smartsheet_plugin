@@ -80,7 +80,7 @@ public class SmartsheetMacro implements Macro
         row_number.attr("class", "level-0");
       }
 
-      row.appendChild(row_number);
+      row.appendChild(ronumber);
 */
       try {
       List<Cell> smartsheetCells  = smartsheetRow.getCells();
@@ -99,31 +99,31 @@ public class SmartsheetMacro implements Macro
 	     if (null != smartsheetCell.getValue())
 	     {
     //           column.appendText(smartsheetCell.getValue().toString());
-                 if (smartsheetCell.getDisplayValue().equals("Green"))
+                 if (smartsheetCell.getValue().toString().equals("Green"))
                  {
                      Element image = new Element(Tag.valueOf("img"), "");
                      image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/green.png");
                      image.attr("width", "25");
                      column.appendChild(image);
                  }
-                 else if (smartsheetCell.getDisplayValue().equals("Yellow"))
+                 else if (smartsheetCell.getValue().toString().equals("Yellow"))
                  {
                      Element image = new Element(Tag.valueOf("img"), "");
                      image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/yellow.png");
                      image.attr("width", "25");
                      column.appendChild(image);
                  }
-                 else if (smartsheetCell.getDisplayValue().equals("Red"))
+                 else if (smartsheetCell.getValue().toString().equals("Red"))
                  { 
                      Element image = new Element(Tag.valueOf("img"), "");
                      image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/red.png");
                      image.attr("width", "25");
                      column.appendChild(image);
-                 }
-                 else
+                 }  
+                 else  
                  {
-                     System.out.println(smartsheetCell.getDisplayValue());
-		     column.appendText(smartsheetCell.getDisplayValue());
+//                     System.out.println(smartsheetCell.getDisplayValue());
+		     column.appendText(smartsheetCell.getValue().toString());
                  }
 	     }
 	     else
@@ -148,9 +148,9 @@ public class SmartsheetMacro implements Macro
             }
 */
        	    row.appendChild(column);       // add column to row
-
-           ++i;
       }
+           i++;
+ 
       } 
       }
       catch(Exception e)
@@ -169,8 +169,8 @@ public class SmartsheetMacro implements Macro
          add("Task Name");
 //         add("Start");
 //         add("Finish");
-//         add("Status");
-//        add("Assigned To");
+         add("Status");
+        add("Assigned To");
         add("Tags");
 //         add("Comments");
 //         add("Predecessors");
