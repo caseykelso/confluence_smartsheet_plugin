@@ -30,7 +30,7 @@ ant plugin
 
 # Rev Version
 cd smartsheetplugin
-atlas-mvn versions:set DnewVersion=x.y
+atlas-mvn versions:set -DnewVersion=x.y-SNAPSHOT
 
 # Release
 ant release
