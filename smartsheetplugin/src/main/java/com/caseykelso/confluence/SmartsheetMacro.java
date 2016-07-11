@@ -33,8 +33,8 @@ public class SmartsheetMacro implements Macro
 {
 
 
-   static private List<Integer> activeColumnIndexes;
-   static private int           tagsColumn;
+   static private List<Integer> activeColumnIndexes; //TODO: refactor, use a class instance per macro execute
+   static private int           tagsColumn; //TODO: same as above
 
    public static Sheet getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
    {
@@ -61,7 +61,7 @@ public class SmartsheetMacro implements Macro
 
    }
 
-   private static Element renderRow(Row smartsheetRow, String tagFilter)
+   private static Element renderRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
    {
       
       Element  row                = new Element(Tag.valueOf("tr"), "");  
@@ -105,7 +105,7 @@ public class SmartsheetMacro implements Macro
            }
 
          // render active columns
-         if (activeColumnIndexes.contains(new Integer(i)))
+         if (activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
          {
  
              Element  column    = new Element(Tag.valueOf("td"), "");
@@ -190,7 +190,7 @@ public class SmartsheetMacro implements Macro
             tagsColumn = i;
          } 
          
-         if ((activeColumnNames.contains(c.getTitle().toString())))
+         if (activeColumnNames.contains("all") || (activeColumnNames.contains(c.getTitle().toString())))
          {
 		 Element column = new Element(Tag.valueOf("th"), "");
 		 column.appendText(c.getTitle().toString());
@@ -215,7 +215,7 @@ public class SmartsheetMacro implements Macro
 
       for (Row r : rows)
       {
-          Element e = renderRow(r,tagFilter);
+          Element e = renderRow(r,tagFilter, activeColumnNames);
 
           if (null != e)
           { 
@@ -307,6 +307,13 @@ public class SmartsheetMacro implements Macro
                  {
 		     activeColumnNames.add("Assigned To");
                  }
+
+                 if (parameters.containsKey("all-column") && parameters.get("all-column").equals("true"))
+                 {
+		     activeColumnNames.add("all");
+                 }
+
+
 
                 String html = "";
 
