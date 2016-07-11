@@ -66,10 +66,10 @@ public class SmartsheetMacro implements Macro
       
       Element  row                = new Element(Tag.valueOf("tr"), "");  
       row.attr("scope", "row");
-
-//      Element  row_number         = new Element(Tag.valueOf("th"), "");
-//      row_number.appendText(smartsheetRow.getRowNumber().toString());
 /*
+      Element  row_number         = new Element(Tag.valueOf("th"), "");
+      row_number.appendText(smartsheetRow.getRowNumber().toString());
+
       if (null != smartsheetRow.getParentId()) 
       {
         row_number.appendText(","+smartsheetRow.getParentId().toString());
@@ -80,7 +80,7 @@ public class SmartsheetMacro implements Macro
         row_number.attr("class", "level-0");
       }
 
-      row.appendChild(ronumber);
+      row.appendChild(row_number);
 */
       try {
       List<Cell> smartsheetCells  = smartsheetRow.getCells();
@@ -175,7 +175,7 @@ public class SmartsheetMacro implements Macro
       Element row         = new Element(Tag.valueOf("tr"), "");
       
       List<Column> columns = s.getColumns();
-/*         
+/*
       Element rownumberColumn = new Element(Tag.valueOf("th"), "");
       rownumberColumn.appendText("Row Number");
       tableHeader.appendChild(rownumberColumn);    
