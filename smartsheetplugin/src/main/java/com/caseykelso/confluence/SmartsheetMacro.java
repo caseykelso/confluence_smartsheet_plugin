@@ -128,7 +128,7 @@ public class SmartsheetMacro implements Macro
 	     }
 	     else
 	     {
-	       column.appendText("-");
+	       column.html("&nbsp;");
 	     }
 /*
             if (i == tagsColumn && !tagFilter.equals("") )
