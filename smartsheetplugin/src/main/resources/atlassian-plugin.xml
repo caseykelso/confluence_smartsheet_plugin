@@ -9,9 +9,20 @@
 
     <xhtml-macro name="confluence-smartsheet-macro" class="com.caseykelso.confluence.SmartsheetMacro" key="smartsheet">
         <parameters>
-          <parameter name="api-token"   type="string" required="true" />
-          <parameter name="sheet-id"    type="string" required="true" />
-          <parameter name="tag-filter"  type="string" required="treu" /> 
+          <parameter name="Smartsheets API Token"                      type="string"  required="true" alias="api-token"/>
+          <parameter name="Smartsheets Sheet ID"                       type="string"  required="true" alias="sheet-id" />
+          <parameter name="Tag Name To Filter By, or (Blank)"          type="string"  required="false" alias="tag-filter" /> 
+<!--
+          <parameter name="Red-Yellow-Green Status Indicator Column"   type="boolean"  alias="ryg-column" />
+          <parameter name="Tasks Column"                               type="boolean"  alias="task-column" /> 
+          <parameter name="Status Column"                              type="boolean"  default="true" alias="status-column"  />
+          <parameter name="Assigned To Column"                         type="boolean"  default="true" alias="assigned-column" />
+          <parameter name="Tags Column"                                type="boolean"  default="false" alias="tags-column" />
+          <parameter name="Comments Column"                            type="boolean"  default="false" alias="comments-column" />
+          <parameter name="Start Column"                            type="boolean"  default="false" alias="start-column" />
+          <parameter name="Finish Column"                            type="boolean"  default="false" alias="finish-column" />
+--> 
+ 
         </parameters>
     </xhtml-macro>
 

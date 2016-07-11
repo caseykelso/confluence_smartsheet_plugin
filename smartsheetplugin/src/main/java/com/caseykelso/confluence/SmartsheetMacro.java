@@ -156,20 +156,8 @@ public class SmartsheetMacro implements Macro
       return row; 
    }
 
-   private static Element renderTableHeader(Sheet s)
+   private static Element renderTableHeader(Sheet s, List<String> activeColumnNames)
    {
-
-     final List<String> activeColumnNames = new ArrayList<String>() {{
-         add("RYG");
-         add("Task Name");
-//         add("Start");
-//         add("Finish");
-         add("Status");
-        add("Assigned To");
-        add("Tags");
-//         add("Comments");
-//         add("Predecessors");
-     }};
 
       activeColumnIndexes = new ArrayList<Integer>();
 
@@ -199,7 +187,6 @@ public class SmartsheetMacro implements Macro
 		 column.appendText(c.getTitle().toString());
 		 tableHeader.appendChild(column);
                  activeColumnIndexes.add(new Integer(i));
-//                 System.out.println("added value to columns: "+i);
          }
 
          ++i;
@@ -209,11 +196,11 @@ public class SmartsheetMacro implements Macro
       return tableHeader;
    }
 
-   private static Element renderTable(Sheet s, String tagFilter)
+   private static Element renderTable(Sheet s, String tagFilter, List<String> activeColumnNames)
    {
       Element  table     = new Element(Tag.valueOf("table"), ""); 
       table.attr("class", "table");
-      table.appendChild(renderTableHeader(s));
+      table.appendChild(renderTableHeader(s, activeColumnNames));
 
       List<Row> rows     = s.getRows(); 
 
@@ -247,7 +234,7 @@ public class SmartsheetMacro implements Macro
    }
   
    
-   public static String renderSheetHTML(Sheet s, String tagFilter)
+   public static String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames)
    {
         Document doc       = Document.createShell("");
         
@@ -257,7 +244,7 @@ public class SmartsheetMacro implements Macro
 
         Element  headline  = doc.body().appendElement("h1").text(s.getName());
         
-        doc.body().appendChild(renderTable(s, tagFilter)); // add table to html body
+        doc.body().appendChild(renderTable(s, tagFilter, activeColumnNames)); // add table to html body
 
         return doc.html();
    }
@@ -268,35 +255,55 @@ public class SmartsheetMacro implements Macro
 	}
 
 
-//        private final XhtmlContent xhtmlUtils;
-/*
-	public SmartsheetMacro(XhtmlContent xhtmlUtils) 
-	{
-		this.xhtmlUtils = xhtmlUtils;	
-	}
-*/
         @Override
         public String execute(Map<String, String> parameters, String bodyContent, ConversionContext conversionContext) throws MacroExecutionException
         {
                 final List<MacroDefinition> macros = new ArrayList<MacroDefinition>();
                 String body = conversionContext.getEntity().getBodyAsString();
-/*
-		try
-		{
-		    xhtmlUtils.handleMacroDefinitions(body, conversionContext, new MacroDefinitionHandler()
-		    {
-			@Override
-			public void handle(MacroDefinition macroDefinition)
-			{
-			    macros.add(macroDefinition);
-			}
-		    });
-		}
-		catch (XhtmlException e)
-		{
-		    throw new MacroExecutionException(e);
-		}
-*/
+
+                List<String> activeColumnNames = new ArrayList<String>();
+
+/* this isn't scalable. Switch from bools to a list of String names, this will be more flexible */
+                 if (parameters.get("tags-column").equals("true"))
+                 {
+		     activeColumnNames.add("Tags");
+                 }
+
+                 if (parameters.get("status-column").equals("true"))
+                 {
+		     activeColumnNames.add("Status");
+                 }
+
+                 if (parameters.get("task-column").equals("true"))
+                 {
+		     activeColumnNames.add("Task Name");
+                 }
+
+                 if (parameters.get("ryg-column").equals("true"))
+                 {
+		     activeColumnNames.add("RYG");
+                 }
+
+                 if (parameters.get("comments-column").equals("true"))
+                 {
+		     activeColumnNames.add("Comments");
+                 }
+
+                 if (parameters.get("start-column").equals("true"))
+                 {
+		     activeColumnNames.add("Start");
+                 }
+
+                 if (parameters.get("finish-column").equals("true"))
+                 {
+		     activeColumnNames.add("Finish");
+                 }
+
+                 if (parameters.get("assigned-column").equals("true"))
+                 {
+		     activeColumnNames.add("Assigned To");
+                 }
+
 
                 String html = "";
 
@@ -310,38 +317,14 @@ public class SmartsheetMacro implements Macro
                        tagFilter = parameters.get("tag-filter");
                    }
 
-		   html = renderSheetHTML(this.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter);
-//                   System.out.println(html);
+		   html = renderSheetHTML(this.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter, activeColumnNames);
 		}
 		catch (Exception e)
 		{
 		   System.err.println("SmartSheetException: " + e.getMessage()); 
-//		   System.exit(2);
 		} 
               return html;
 
-/*
-StringBuilder builder = new StringBuilder();
-        builder.append("<p>");
-        if (!macros.isEmpty())
-        {
-            builder.append("<table width=\"50%\">");
-            builder.append("<tr><th>Macro Name</th><th>Has Body?</th></tr>");
-            for (MacroDefinition defn : macros)
-            {
-                builder.append("<tr>");
-                builder.append("<td>").append(defn.getName()).append("</td><td>").append(defn.hasBody()).append("</td>");
-                builder.append("</tr>");
-            }
-            builder.append("</table>");
-        }
-        else
-        {
-            builder.append("You've done built yourself a macro! Nice work.");
-        }
-        builder.append("</p>");
-
-        return builder.toString(); */
         }
 
 
