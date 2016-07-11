@@ -3,7 +3,8 @@ Confluence Plug-in connects Smartsheet &amp; Confluence
 
 # Setup Environment
 * Install Atlas (https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project/install-the-atlassian-sdk-on-a-linux-or-mac-system)
-* Install JDK 1.8 or later and setup JAVA_HOME and Paths correctly
+* Install Oracle JDK 1.8 (OPENJDK is not supported by Atlassian)
+* Setup JAVA_HOME and env PATH
 * mkdir confluence_smartsheet
 * cd confluence_smartsheet
 * repo init -m smartsheetplugin.xml -u git://github.com/caseykelso/confluence_smartsheet_plugin
