@@ -307,8 +307,15 @@ public class SmartsheetMacro implements Macro
 
 		try 
 		{ 
-                   String sheetID = parameters.get("sheet-id");
-		   html = renderSheetHTML(this.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), "bacon_summary");
+                   String sheetID   = parameters.get("sheet-id");
+                   String tagFilter = "";
+  
+                   if (parameters.containsKey("tag-filter"))
+                   {
+                       tagFilter = parameters.get("tag-filter");
+                   }
+
+		   html = renderSheetHTML(this.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter);
 //                   System.out.println(html);
 		}
 		catch (Exception e)

@@ -9,8 +9,9 @@
 
     <xhtml-macro name="confluence-smartsheet-macro" class="com.caseykelso.confluence.SmartsheetMacro" key="smartsheet">
         <parameters>
-          <parameter name="api-token"  type="string" required="true" />
-          <parameter name="sheet-id"   type="string" required="true" />
+          <parameter name="api-token"   type="string" required="true" />
+          <parameter name="sheet-id"    type="string" required="true" />
+          <parameter name="tag-filter"  type="string" required="treu" /> 
         </parameters>
     </xhtml-macro>
 
