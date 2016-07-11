@@ -260,6 +260,12 @@ public class SmartsheetMacro implements Macro
 
 
         @Override
+        public OutputType getOutputType()
+        {
+             return OutputType.INLINE;
+        }
+
+        @Override
         public String execute(Map<String, String> parameters, String bodyContent, ConversionContext conversionContext) throws MacroExecutionException
         {
                 final List<MacroDefinition> macros = new ArrayList<MacroDefinition>();
@@ -344,10 +350,5 @@ public class SmartsheetMacro implements Macro
                 return BodyType.NONE;
 	}
 
-	@Override
-	public OutputType getOutputType() 
-        {
-                return OutputType.BLOCK;
-	}
 }
 

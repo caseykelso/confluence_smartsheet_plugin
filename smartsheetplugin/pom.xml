@@ -103,7 +103,7 @@
 
 	<developers>
 		<developer>
-			<email />
+			<email>casey@caseykelso.com</email>
 			<name>Casey Kelso</name>
 			<url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
 			<id>caseykelso</id>
@@ -112,7 +112,7 @@
 
 
     <organization>
-        <name>.</name>
+        <name>Casey Kelso</name>
         <url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
     </organization>
 
