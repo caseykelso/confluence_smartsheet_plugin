@@ -94,11 +94,9 @@ public class SmartsheetMacro implements Macro
          {
  
              Element  column    = new Element(Tag.valueOf("td"), "");
-//             System.out.println("matched value to column: "+i);
 
 	     if (null != smartsheetCell.getValue())
 	     {
-    //           column.appendText(smartsheetCell.getValue().toString());
                  if (smartsheetCell.getValue().toString().equals("Green"))
                  {
                      Element image = new Element(Tag.valueOf("img"), "");
@@ -122,7 +120,6 @@ public class SmartsheetMacro implements Macro
                  }  
                  else  
                  {
-//                     System.out.println(smartsheetCell.getDisplayValue());
 		     column.appendText(smartsheetCell.getValue().toString());
                  }
 	     }
@@ -130,24 +127,22 @@ public class SmartsheetMacro implements Macro
 	     {
 	       column.html("&nbsp;");
 	     }
-/*
-            if (i == tagsColumn && !tagFilter.equals("") )
+
+            
+            if ((i == tagsColumn) && !tagFilter.equals(""))
             {
-               System.out.println("================================"+smartsheetCell.getDisplayValue());
-               if (-1 == smartsheetCell.getDisplayValue().indexOf(tagFilter))
+               if (null == smartsheetCell.getValue().toString())
                {
-                   System.out.println("************************"+tagFilter);
-                   return null; 
-               } 
-            }
-*/
-/*
-            else if (i == tagsColumn)
-            {
-               System.out.println("+++++++++++++++++++++++++++++"+smartsheetCell.getDisplayValue());
-            }
-*/
-       	    row.appendChild(column);       // add column to row
+                  return null; //TODO: Refactor to remove multiple returns
+               }
+               else if (-1 == smartsheetCell.getValue().toString().indexOf(tagFilter))
+               {
+                  return null; //TODO: Refactor to remove multiple returns
+               }
+
+           }
+
+      	    row.appendChild(column);       // add column to row
       }
            i++;
  
@@ -155,7 +150,7 @@ public class SmartsheetMacro implements Macro
       }
       catch(Exception e)
       {
-//          System.err.println("renderRow Exception: " + e.getMessage());
+          row = null;
       }
  
       return row; 
