@@ -8,7 +8,10 @@
     </plugin-info>
 
     <xhtml-macro name="confluence-smartsheet-macro" class="com.caseykelso.confluence.SmartsheetMacro" key="smartsheet">
-        <parameters/>
+        <parameters>
+          <parameter name="api-token"  type="string" required="true" />
+          <parameter name="sheet-id"   type="string" required="true" />
+        </parameters>
     </xhtml-macro>
 
     <!-- add our i18n resource -->

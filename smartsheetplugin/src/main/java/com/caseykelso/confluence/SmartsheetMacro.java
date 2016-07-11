@@ -90,12 +90,12 @@ public class SmartsheetMacro implements Macro
       for (Cell smartsheetCell : smartsheetCells)
       {
 
-      //   if (activeColumnIndexes.contains(new Integer(i)))
+         if (activeColumnIndexes.contains(new Integer(i)))
          {
  
              Element  column    = new Element(Tag.valueOf("td"), "");
 //             System.out.println("matched value to column: "+i);
-column.appendText("*");
+
 	     if (null != smartsheetCell.getValue())
 	     {
     //           column.appendText(smartsheetCell.getValue().toString());
@@ -169,9 +169,9 @@ column.appendText("*");
          add("Task Name");
 //         add("Start");
 //         add("Finish");
-         add("Status");
-         add("Assigned To");
-         add("Tags");
+//         add("Status");
+//        add("Assigned To");
+        add("Tags");
 //         add("Comments");
 //         add("Predecessors");
      }};
@@ -307,6 +307,8 @@ column.appendText("*");
 
 		try 
 		{ 
+                   String sheetID = parameters.get("sheet-id");
+		   html = renderSheetHTML(this.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), "bacon_summary");
 //                   System.out.println(html);
 		}
 		catch (Exception e)
