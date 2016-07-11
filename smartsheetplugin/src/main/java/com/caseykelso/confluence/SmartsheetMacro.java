@@ -28,8 +28,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
-/*import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime; */
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
@@ -55,6 +53,9 @@ public class SmartsheetMacro implements Macro
         Home home = smartsheet.homeResources().getHome(EnumSet.of(SourceInclusion.SOURCE));
 
         return smartsheet.sheetResources().getSheet(sheetID, null, null, null, null, null, null, null);
+
+//          return smartsheet.sheetResources().getSheet(sheetID, 
+//TODO: http://stackoverflow.com/questions/35846003/cell-columntype-is-null-using-smartsheet-api?rq=1
        
    }
 
@@ -72,6 +73,9 @@ public class SmartsheetMacro implements Macro
        return "placeholder";
    }
 
+//TODO: migrate to jqxTreeGrid for hierarchical grid
+//http://www.jqwidgets.com/jquery-widgets-demo/mobiledemos/jqxtreegrid/index.htm#demos/jqxtreegrid/treegrid.htm
+//free for opensource
    private static Element renderRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
    {
       
@@ -118,7 +122,7 @@ public class SmartsheetMacro implements Macro
          // render active columns
          if (activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
          {
- 
+             System.out.println("ENUM: " + smartsheetCell.getColumnType()); 
              Element  column    = new Element(Tag.valueOf("td"), "");
 
 	     if (null != smartsheetCell.getValue())
@@ -143,22 +147,22 @@ public class SmartsheetMacro implements Macro
                      image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/red.png");
                      image.attr("width", "25");
                      column.appendChild(image);
-                 }  
+                 } 
                  else if (ColumnType.CHECKBOX              == smartsheetCell.getColumnType() || 
                           ColumnType.PICKLIST              == smartsheetCell.getColumnType() || 
                           ColumnType.TEXT_NUMBER           == smartsheetCell.getColumnType() || 
                           ColumnType.PREDECESSOR           == smartsheetCell.getColumnType() || 
                           ColumnType.CONTACT_LIST          == smartsheetCell.getColumnType() || 
-                          ColumnType.DURATION == smartsheetCell.getColumnType() )
+                          ColumnType.DURATION              == smartsheetCell.getColumnType() )
                  {
-                       System.out.println("NOTDATE------------------------");
+                  //     System.out.println("NOT_DATE------------------------");
                  }
  
                  else if (ColumnType.DATE              == smartsheetCell.getColumnType() || 
                           ColumnType.DATETIME          == smartsheetCell.getColumnType() || 
                           ColumnType.ABSTRACT_DATETIME == smartsheetCell.getColumnType() )
                  {
-                       System.out.println("DATE**************************"); 
+                  //     System.out.println("DATE**************************"); 
 
                         try
                         {
@@ -176,6 +180,7 @@ public class SmartsheetMacro implements Macro
                  }
                  else 
                  {
+                     //System.out.println("OTHER*************************");
                      try 
                      {
 		        column.appendText(smartsheetCell.getDisplayValue());
