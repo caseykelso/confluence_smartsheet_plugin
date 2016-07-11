@@ -28,6 +28,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
+/*import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime; */
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
+
 
 public class SmartsheetMacro implements Macro 
 {
@@ -59,6 +65,11 @@ public class SmartsheetMacro implements Macro
            System.out.println("sheet name: " + s.getName());
         }
 
+   }
+
+   private static String renderDate(Element e)
+   {
+       return "placeholder";
    }
 
    private static Element renderRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
@@ -133,7 +144,37 @@ public class SmartsheetMacro implements Macro
                      image.attr("width", "25");
                      column.appendChild(image);
                  }  
-                 else  
+                 else if (ColumnType.CHECKBOX              == smartsheetCell.getColumnType() || 
+                          ColumnType.PICKLIST              == smartsheetCell.getColumnType() || 
+                          ColumnType.TEXT_NUMBER           == smartsheetCell.getColumnType() || 
+                          ColumnType.PREDECESSOR           == smartsheetCell.getColumnType() || 
+                          ColumnType.CONTACT_LIST          == smartsheetCell.getColumnType() || 
+                          ColumnType.DURATION == smartsheetCell.getColumnType() )
+                 {
+                       System.out.println("NOTDATE------------------------");
+                 }
+ 
+                 else if (ColumnType.DATE              == smartsheetCell.getColumnType() || 
+                          ColumnType.DATETIME          == smartsheetCell.getColumnType() || 
+                          ColumnType.ABSTRACT_DATETIME == smartsheetCell.getColumnType() )
+                 {
+                       System.out.println("DATE**************************"); 
+
+                        try
+                        {
+
+		            SimpleDateFormat sourceDateFormat = new SimpleDateFormat("yyyy-MM-DDTHH:mm:ss");
+		            Date date = sourceDateFormat.parse(smartsheetCell.getValue().toString());
+			    SimpleDateFormat targetDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   			    System.out.println(targetDateFormat.format(date));
+   	                }
+                        catch(ParseException e) 
+                        {
+			    e.printStackTrace();
+			}
+			   
+                 }
+                 else 
                  {
                      try 
                      {
@@ -165,6 +206,8 @@ public class SmartsheetMacro implements Macro
  
       return row; 
    }
+
+
 
    private static Element renderTableHeader(Sheet s, List<String> activeColumnNames)
    {
@@ -251,7 +294,6 @@ public class SmartsheetMacro implements Macro
         
         doc.appendChild(renderTable(s, tagFilter, activeColumnNames)); // add table to html body
 
-        System.out.println("document: "+doc.html());
         return doc.html();
    }
 
