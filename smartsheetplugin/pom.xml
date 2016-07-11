@@ -62,7 +62,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.caseykelso.confluence</groupId>
     <artifactId>smartsheetplugin</artifactId>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
 
 	<issueManagement>
 		<url>https://github.com/kevinsawicki/github-maven-example/issues</url>
@@ -81,7 +81,7 @@
 		<url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
 		<connection>scm:git:git://github.com/caseykelso/confluence_smartsheet_plugin.git</connection>
 		<developerConnection>scm:git:git@github.com:caseykelso/confluence_smartsheet_plugin.git</developerConnection>
-	  <tag>smartsheetplugin-0.2</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<developers>
@@ -92,6 +92,15 @@
 			<id>caseykelso</id>
 		</developer>
 	</developers>
+
+
+<distributionManagement>
+    <repository>
+        <id>internal.repo</id>
+        <name>Temporary Staging Repository</name>
+        <url>file://${project.build.directory}/mvn-repo</url>
+    </repository>
+</distributionManagement>
 
 
     <organization>
