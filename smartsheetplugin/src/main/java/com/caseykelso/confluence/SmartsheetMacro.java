@@ -244,12 +244,14 @@ public class SmartsheetMacro implements Macro
         
         DataNode script    = new DataNode("script", "");
         script.setWholeData(renderCDNs());
-        doc.body().appendChild(script);
+        doc.empty();
+        doc.appendChild(script);
 
-        Element  headline  = doc.body().appendElement("h1").text(s.getName());
+        Element  headline  = doc.appendElement("h1").text(s.getName());
         
-        doc.body().appendChild(renderTable(s, tagFilter, activeColumnNames)); // add table to html body
+        doc.appendChild(renderTable(s, tagFilter, activeColumnNames)); // add table to html body
 
+        System.out.println("document: "+doc.html());
         return doc.html();
    }
 
@@ -262,8 +264,14 @@ public class SmartsheetMacro implements Macro
         @Override
         public OutputType getOutputType()
         {
-             return OutputType.INLINE;
+             return OutputType.BLOCK;
         }
+
+	@Override
+	public BodyType getBodyType() 
+        {
+                return BodyType.NONE;
+	}
 
         @Override
         public String execute(Map<String, String> parameters, String bodyContent, ConversionContext conversionContext) throws MacroExecutionException
@@ -339,16 +347,13 @@ public class SmartsheetMacro implements Macro
 		{
 		   System.err.println("SmartSheetException: " + e.getMessage()); 
 		} 
-              return html;
+
+                return html;
 
         }
 
 
-	@Override
-	public BodyType getBodyType() 
-        {
-                return BodyType.NONE;
-	}
+
 
 }
 
