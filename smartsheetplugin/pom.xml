@@ -97,6 +97,22 @@
             <scope>compile</scope>
         </dependency>
 
+<!--
+	<dependency>
+	    <groupId>org.apache.avalon.framework</groupId>
+	    <artifactId>avalon-framework-api</artifactId>
+	    <version>4.3.1</version>
+	</dependency>
+
+-->
+
+
+	<dependency>
+	    <groupId>commons-logging</groupId>
+	    <artifactId>commons-logging</artifactId>
+	    <version>[0.1,)</version> 
+	</dependency>
+
         <dependency> 
           <groupId>com.smartsheet</groupId>
           <artifactId>smartsheet-sdk-java</artifactId>
@@ -111,6 +127,8 @@
           <scope>compile</scope>
         </dependency>
 
+ 
+<!--
 	<dependency>
 	    <groupId>org.apache.httpcomponents</groupId>
 	    <artifactId>httpclient</artifactId>
@@ -125,17 +143,14 @@
           <scope>compile</scope>
         </dependency>
 
-<dependency>
-    <groupId>org.apache.avalon.framework</groupId>
-    <artifactId>avalon-framework-api</artifactId>
-    <version>4.3.1</version>
-</dependency>
+    <dependency>
+        <groupId>javafx</groupId>
+        <artifactId>jfxrt</artifactId>
+        <version>[2.2,)</version>
+        <scope>system</scope>
+        <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
+    </dependency>
 
-<dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <version>1.1.1</version>
-</dependency>
 
 <dependency>
     <groupId>org.apache.felix</groupId>
@@ -170,7 +185,7 @@
 	    <type>pom</type>
 	    <scope>compile</scope>
 	</dependency>
-
+-->
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-runtime</artifactId>
@@ -217,6 +232,12 @@
                     <productDataVersion>5.9.12</productDataVersion>
                     <enableQuickReload>true</enableQuickReload>
                     <enableFastdev>false</enableFastdev>
+
+                    <pluginArtifact>
+                        <groupId>com.atlassian.labs.plugins</groupId>
+                        <artifactId>quickreload</artifactId>
+                        <version>${quick.reload.version}</version>
+                    </pluginArtifact>
 
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
