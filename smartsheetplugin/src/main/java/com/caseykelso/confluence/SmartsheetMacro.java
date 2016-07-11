@@ -89,7 +89,22 @@ public class SmartsheetMacro implements Macro
 
       for (Cell smartsheetCell : smartsheetCells)
       {
+          
+            // filter row on tag column
+            if ((i == tagsColumn) && !tagFilter.equals(""))
+            {
+               if (null == smartsheetCell.getValue().toString())
+               {
+                  return null; //TODO: Refactor to remove multiple returns
+               }
+               else if (-1 == smartsheetCell.getValue().toString().indexOf(tagFilter))
+               {
+                  return null; //TODO: Refactor to remove multiple returns
+               }
 
+           }
+
+         // render active columns
          if (activeColumnIndexes.contains(new Integer(i)))
          {
  
@@ -128,19 +143,6 @@ public class SmartsheetMacro implements Macro
 	       column.html("&nbsp;");
 	     }
 
-            
-            if ((i == tagsColumn) && !tagFilter.equals(""))
-            {
-               if (null == smartsheetCell.getValue().toString())
-               {
-                  return null; //TODO: Refactor to remove multiple returns
-               }
-               else if (-1 == smartsheetCell.getValue().toString().indexOf(tagFilter))
-               {
-                  return null; //TODO: Refactor to remove multiple returns
-               }
-
-           }
 
       	    row.appendChild(column);       // add column to row
       }
@@ -178,7 +180,6 @@ public class SmartsheetMacro implements Macro
          if (c.getTitle().equals("Tags"))
          {
             tagsColumn = i;
-            System.out.println("Tags Column Number: "+tagsColumn);
          } 
          
          if ((activeColumnNames.contains(c.getTitle().toString())))
@@ -264,46 +265,45 @@ public class SmartsheetMacro implements Macro
                 List<String> activeColumnNames = new ArrayList<String>();
 
 /* this isn't scalable. Switch from bools to a list of String names, this will be more flexible */
-                 if (parameters.get("tags-column").equals("true"))
+                 if (parameters.containsKey("tags-column") && parameters.get("tags-column").equals("true"))
                  {
 		     activeColumnNames.add("Tags");
                  }
 
-                 if (parameters.get("status-column").equals("true"))
+                 if (parameters.containsKey("status-column") && parameters.get("status-column").equals("true"))
                  {
 		     activeColumnNames.add("Status");
                  }
 
-                 if (parameters.get("task-column").equals("true"))
+                 if (parameters.containsKey("task-column") && parameters.get("task-column").equals("true"))
                  {
 		     activeColumnNames.add("Task Name");
                  }
 
-                 if (parameters.get("ryg-column").equals("true"))
+                 if (parameters.containsKey("ryg-column") && parameters.get("ryg-column").equals("true"))
                  {
 		     activeColumnNames.add("RYG");
                  }
 
-                 if (parameters.get("comments-column").equals("true"))
+                 if (parameters.containsKey("comments-column") && parameters.get("comments-column").equals("true"))
                  {
 		     activeColumnNames.add("Comments");
                  }
 
-                 if (parameters.get("start-column").equals("true"))
+                 if (parameters.containsKey("start-column") && parameters.get("start-column").equals("true"))
                  {
 		     activeColumnNames.add("Start");
                  }
 
-                 if (parameters.get("finish-column").equals("true"))
+                 if (parameters.containsKey("finish-column") && parameters.get("finish-column").equals("true"))
                  {
 		     activeColumnNames.add("Finish");
                  }
 
-                 if (parameters.get("assigned-column").equals("true"))
+                 if (parameters.containsKey("assigned-column") && parameters.get("assigned-column").equals("true"))
                  {
 		     activeColumnNames.add("Assigned To");
                  }
-
 
                 String html = "";
 
