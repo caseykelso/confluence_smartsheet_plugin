@@ -122,17 +122,28 @@ public class SmartsheetMacro implements Macro
          // render active columns
          if (activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
          {
-             System.out.println("ENUM: " + smartsheetCell.getColumnType()); 
+//             System.out.println("ENUM: " + smartsheetCell.getColumnType()); 
              Element  column    = new Element(Tag.valueOf("td"), "");
 
 	     if (null != smartsheetCell.getValue())
 	     {
                  if (smartsheetCell.getValue().toString().equals("Green"))
                  {
+                     Element link = new Element(Tag.valueOf("a"), "");
+try {
+                     link.attr("href", smartsheetRow.getPermalink());
+}
+catch (Exception e)
+{
+    e.printStackTrace();
+	
+}
                      Element image = new Element(Tag.valueOf("img"), "");
                      image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/green.png");
                      image.attr("width", "25");
                      column.appendChild(image);
+//                     column.appendChild(link);
+//TODO: render link from confluence back to the smartsheet row
                  }
                  else if (smartsheetCell.getValue().toString().equals("Yellow"))
                  {
