@@ -295,7 +295,7 @@ public class SmartsheetMacro implements Macro
         doc.empty();
         doc.appendChild(script);
 
-        Element  headline  = doc.appendElement("h1").text(s.getName());
+//        Element  headline  = doc.appendElement("h1").text(s.getName());
         
         doc.appendChild(renderTable(s, tagFilter, activeColumnNames)); // add table to html body
 
