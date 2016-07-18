@@ -3,6 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 
+
 <distributionManagement>
     <repository>
         <id>internal.repo</id>
@@ -81,6 +82,16 @@
     <artifactId>smartsheetplugin</artifactId>
     <version>0.3-SNAPSHOT</version>
 
+    <organization>
+        <name>Casey Kelso</name>
+        <url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
+    </organization>
+
+    <name>smartsheetplugin</name>
+    <description>This is the com.caseykelso.confluence:smartsheetplugin plugin for Atlassian Confluence.</description>
+    <packaging>atlassian-plugin</packaging>
+
+
 	<issueManagement>
 		<url>https://github.com/kevinsawicki/github-maven-example/issues</url>
 		<system>GitHub Issues</system>
@@ -110,17 +121,31 @@
 		</developer>
 	</developers>
 
-
-    <organization>
-        <name>Casey Kelso</name>
-        <url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
-    </organization>
-
-    <name>smartsheetplugin</name>
-    <description>This is the com.caseykelso.confluence:smartsheetplugin plugin for Atlassian Confluence.</description>
-    <packaging>atlassian-plugin</packaging>
-
     <dependencies>
+
+<!--
+	<dependency>
+		<groupId>com.atlassian.templaterenderer</groupId>
+		<artifactId>atlassian-template-renderer-api</artifactId>
+		<version>3.0.0</version>
+		<scope>compile</scope>
+	</dependency>
+
+        <dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>19.0</version>
+                <scope>compile</scope>
+	</dependency>
+
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>servlet-api</artifactId>
+	    <version>2.5</version>
+            <scope>compile</scope>
+	</dependency>
+-->
+
        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
