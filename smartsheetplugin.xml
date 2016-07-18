@@ -2,7 +2,7 @@
 <manifest>
 
    <remote name="github"
-           fetch="ssh://github.com" />
+           fetch="ssh://git@github.com" />
 
    <remote name="github_read_only"
           fetch="https://github.com" />
