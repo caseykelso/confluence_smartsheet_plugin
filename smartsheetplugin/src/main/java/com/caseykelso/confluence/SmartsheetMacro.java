@@ -37,10 +37,10 @@ public class SmartsheetMacro implements Macro
 {
 
 
-   static private List<Integer> activeColumnIndexes; //TODO: refactor, use a class instance per macro execute
-   static private int           tagsColumn; //TODO: same as above
+   private List<Integer> activeColumnIndexes; //TODO: refactor, use a class instance per macro execute
+   private int           tagsColumn; //TODO: same as above
 
-   public static Sheet getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
+   public Sheet getSheet(String smartsheetToken, long sheetID) throws SmartsheetException
    {
         // Set the Access Token
         Token token = new Token();
@@ -59,7 +59,7 @@ public class SmartsheetMacro implements Macro
        
    }
 
-   public static void renderSheet(Sheet s)
+   public void renderSheet(Sheet s)
    {
         if (null != s)
         {
@@ -68,7 +68,7 @@ public class SmartsheetMacro implements Macro
 
    }
 
-   private static String renderDate(Element e)
+   private String renderDate(Element e)
    {
        return "placeholder";
    }
@@ -76,27 +76,12 @@ public class SmartsheetMacro implements Macro
 //TODO: migrate to jqxTreeGrid for hierarchical grid
 //http://www.jqwidgets.com/jquery-widgets-demo/mobiledemos/jqxtreegrid/index.htm#demos/jqxtreegrid/treegrid.htm
 //free for opensource
-   private static Element renderRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
+   private Element renderRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
    {
       
       Element  row                = new Element(Tag.valueOf("tr"), "");  
       row.attr("scope", "row");
-/*
-      Element  row_number         = new Element(Tag.valueOf("th"), "");
-      row_number.appendText(smartsheetRow.getRowNumber().toString());
 
-      if (null != smartsheetRow.getParentId()) 
-      {
-        row_number.appendText(","+smartsheetRow.getParentId().toString());
-        row_number.attr("class", "level-1");
-      }
-      else
-      {
-        row_number.attr("class", "level-0");
-      }
-
-      row.appendChild(row_number);
-*/
       try {
       List<Cell> smartsheetCells  = smartsheetRow.getCells();
 
@@ -122,7 +107,6 @@ public class SmartsheetMacro implements Macro
          // render active columns
          if (activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
          {
-//             System.out.println("ENUM: " + smartsheetCell.getColumnType()); 
              Element  column    = new Element(Tag.valueOf("td"), "");
 
 	     if (null != smartsheetCell.getValue())
@@ -166,14 +150,12 @@ catch (Exception e)
                           ColumnType.CONTACT_LIST          == smartsheetCell.getColumnType() || 
                           ColumnType.DURATION              == smartsheetCell.getColumnType() )
                  {
-                  //     System.out.println("NOT_DATE------------------------");
                  }
  
                  else if (ColumnType.DATE              == smartsheetCell.getColumnType() || 
                           ColumnType.DATETIME          == smartsheetCell.getColumnType() || 
                           ColumnType.ABSTRACT_DATETIME == smartsheetCell.getColumnType() )
                  {
-                  //     System.out.println("DATE**************************"); 
 
                         try
                         {
@@ -191,7 +173,6 @@ catch (Exception e)
                  }
                  else 
                  {
-                     //System.out.println("OTHER*************************");
                      try 
                      {
 		        column.appendText(smartsheetCell.getDisplayValue());
@@ -225,7 +206,7 @@ catch (Exception e)
 
 
 
-   private static Element renderTableHeader(Sheet s, List<String> activeColumnNames)
+   private Element renderTableHeader(Sheet s, List<String> activeColumnNames)
    {
 
       activeColumnIndexes = new ArrayList<Integer>();
@@ -234,11 +215,7 @@ catch (Exception e)
       Element row         = new Element(Tag.valueOf("tr"), "");
       
       List<Column> columns = s.getColumns();
-/*
-      Element rownumberColumn = new Element(Tag.valueOf("th"), "");
-      rownumberColumn.appendText("Row Number");
-      tableHeader.appendChild(rownumberColumn);    
-*/
+
       tagsColumn = 0;
       int i      = 0;
  
@@ -264,7 +241,7 @@ catch (Exception e)
       return tableHeader;
    }
 
-   private static Element renderTable(Sheet s, String tagFilter, List<String> activeColumnNames)
+   private Element renderTable(Sheet s, String tagFilter, List<String> activeColumnNames)
    {
       Element  table     = new Element(Tag.valueOf("table"), ""); 
       table.attr("class", "table table-striped table-hover");
@@ -285,7 +262,7 @@ catch (Exception e)
       return table;
    }
 
-   public static String renderCDNs()
+   public String renderCDNs()
    {
        String cdns = ""
        + "<!-- Latest compiled and minified CSS -->"
@@ -297,7 +274,7 @@ catch (Exception e)
    }
   
    
-   public static String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames)
+   public String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames)
    {
         Document doc       = Document.createShell("");
         
@@ -409,9 +386,6 @@ catch (Exception e)
                 return html;
 
         }
-
-
-
 
 }
 
