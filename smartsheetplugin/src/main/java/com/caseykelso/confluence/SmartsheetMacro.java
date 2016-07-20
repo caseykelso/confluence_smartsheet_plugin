@@ -115,7 +115,7 @@ public class SmartsheetMacro implements Macro
                  {
                      Element link = new Element(Tag.valueOf("a"), "");
 try {
-                     link.attr("href", smartsheetRow.getPermalink());
+//                     link.attr("href", smartsheetRow.getPermalink());
 }
 catch (Exception e)
 {
