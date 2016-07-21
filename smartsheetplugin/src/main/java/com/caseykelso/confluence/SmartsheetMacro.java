@@ -32,6 +32,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class SmartsheetMacro implements Macro 
 {
@@ -56,7 +60,7 @@ public class SmartsheetMacro implements Macro
 
 //          return smartsheet.sheetResources().getSheet(sheetID, 
 //TODO: http://stackoverflow.com/questions/35846003/cell-columntype-is-null-using-smartsheet-api?rq=1
-       
+//TODO: use jackson to serialize java objects to JSON: http://www.mkyong.com/java/jackson-2-convert-java-object-to-from-json/       
    }
 
    public void renderSheet(Sheet s)
