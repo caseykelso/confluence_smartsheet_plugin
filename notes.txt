@@ -1,0 +1,8 @@
+plugin resources (embed):
+https://developer.atlassian.com/confdev/confluence-plugin-guide/writing-confluence-plugins/including-javascript-and-css-resources
+
+jquery jqxtreegrid example:
+http://www.jqwidgets.com/jquery-widgets-demo/mobiledemos/jqxtreegrid/index.htm#demos/jqxtreegrid/treegrid.htm
+
+
+
