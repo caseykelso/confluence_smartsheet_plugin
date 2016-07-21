@@ -13,3 +13,5 @@ jsoup
 *.html
 .DS_Store
 *DS_Store*
+smartsheetplugin/jqwidget/
+
