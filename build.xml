@@ -12,13 +12,17 @@
 <property name="target.jar"            value="${target.dir}/target.jar" /> <!-- needs to be renamed -->
 <property name="cli.jar"               value="${cli.dir}/target/commons-cli-1.4-SNAPSHOT.jar" />
 <property name="jsoup.jar"             value="${jsoup.dir}/target/jsoup-1.9.3-SNAPSHOT.jar" />
-<property name="jqwidget.dir"          value="${plugin.dir}/jqwidget" />
+<property name="jqwidget.dir"          value="${plugin.dir}/src/main/resources/js" />
 
 <target name="all" depends="jqwidgets_unpack, smartsheet_sdk, commons-cli, jsoup, build_plugin, package_plugin, build_tools, package_target" >
 </target>
 
 <target name="jqwidgets_unpack">
-  <unzip src="${basedir}/dependencies/jqwidgets-ver4.1.2.zip" dest="${jqwidget.dir}" />
+  <unzip src="${basedir}/dependencies/jqwidgets-ver4.1.2.zip" dest="${jqwidget.dir}" >
+     <patternset>
+        <include name="jqwidgets/*.*" />
+     </patternset>
+  </unzip>
 </target>
 
 <target name="release">

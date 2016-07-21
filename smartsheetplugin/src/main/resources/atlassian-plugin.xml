@@ -33,8 +33,16 @@
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         
         <resource type="download" name="smartsheetplugin.css" location="/css/smartsheetplugin.css"/>
-        <resource type="download" name="smartsheetplugin.js" location="/js/smartsheetplugin.js"/>
-        <resource type="download" name="images/" location="/images"/>
+        <resource type="download" name="smartsheetplugin.js"  location="/js/smartsheetplugin.js"/>
+        <resource type="download" name="images/"              location="/images"/>
+        <resource type="download" name="jqxcore.js"           location="/js/jqwidgets/jqxcore.js" />
+        <resource type="download" name="jqxdata.js"           location="/js/jqwidgets/jqxdata.js" />
+        <resource type="download" name="jqxbuttons.js"        location="/js/jqwidgets/jqxbuttons.js" />
+        <resource type="download" name="jqxscrollbar.js"      location="/js/jqwidgets/jqxscrollbar.js" />
+        <resource type="download" name="jqxlistbox.js"        location="/js/jqwidgets/jqxlistbox.js" />
+        <resource type="download" name="jqxdropdownlist.js"   location="/js/jqwidgets/jqxdropdownlist.js" />
+        <resource type="download" name="jqxdatatable.js"      location="/js/jqwidgets/jqxdatatable.js" />
+        <resource type="download" name="jqxtreegrid.js"       location="/js/jqwidgets/jqxtreegrid.js" /> 
 
         <context>smartsheetplugin</context>
     </web-resource>
