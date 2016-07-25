@@ -1,4 +1,5 @@
 *.swp
+*.swo
 amps-standalone-refapp-LATEST/
 .idea
 .repo
