@@ -26,8 +26,6 @@ import org.jsoup.nodes.DataNode;
 import org.jsoup.parser.Tag;
 
 
-
-
 public class SmartsheetCLI 
 {
 
