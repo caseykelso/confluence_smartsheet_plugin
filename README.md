@@ -1,4 +1,4 @@
-# confluence_smartsheet_plugin
+# Atlassian Confluence Smartsheet Plug-in 
 Confluence Plug-in connects Smartsheet &amp; Confluence
 
 # License
