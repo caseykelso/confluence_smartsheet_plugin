@@ -18,12 +18,12 @@ lorem ipsum
 lorem ipsum
 
 # Setup Environment (OSX)
-* Install Homebrew
+## Install Homebrew
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update && brew upgrade
 ```
-* Install Atlas (Atlassian Development Environment)
+## Install Atlas (Atlassian Development Environment)
 ```
 brew tap atlassian/tap
 brew install atlassian/tap/atlassian-plugin-sdk
@@ -31,13 +31,13 @@ brew install atlassian/tap/atlassian-plugin-sdk
 * Install Oracle JDK 1.8 (OPENJDK is not supported by Atlassian)
 * Setup JAVA_HOME and env PATH
 
-* Install Tools & Dependencies
+# Install Tools & Dependencies
 ```
 brew install maven ant git
 ```
 
 # Setup Environment (Ubuntu/Debian/Mint Linux)
-* Install Tools & Dependencies
+## Install Tools & Dependencies
 ```
 sudo add-apt-repository ppa:webupd8team/java
 sudo sh -c 'echo "deb https://sdkrepo.atlassian.com/debian/ stable contrib" >>/etc/apt/sources.list'
