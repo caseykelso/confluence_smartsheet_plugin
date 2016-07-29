@@ -38,7 +38,7 @@ public class SmartsheetCLI
    {
        Options options = new Options();
        options.addOption("h", "help", false, "show help");  
-       options.addOption("as", "allsheets", false, "show sheets");
+//       options.addOption("as", "allsheets", false, "show sheets");
        options.addOption("s", "sheet", true, "show sheet");
        return options;
    }
