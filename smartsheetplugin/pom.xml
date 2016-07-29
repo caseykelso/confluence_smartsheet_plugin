@@ -123,6 +123,12 @@
             <scope>compile</scope>
 	</dependency>
 -->
+       <dependency>
+            <groupId>com.caseykelso.smartsheet</groupId>
+            <artifactId>smartsheetrestclient</artifactId>
+            <version>0.3-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
