@@ -22,6 +22,7 @@ Apache 2.0 License - see [LICENSE](https://github.com/caseykelso/confluence_smar
 
 # Source Code
 * JavaDoc (TBD)
+
 | File       |  Description |
 | ---------- | ------------ |
 | pom.xml    | Maven project file |
