@@ -1,6 +1,20 @@
 # confluence_smartsheet_plugin
 Confluence Plug-in connects Smartsheet &amp; Confluence
 
+# License
+lorem ipsum
+
+# 3rd-Party Dependencies
+* com.smartsheet.smartsheet-sdk-java Version 2.0.4
+* org.jsoup.jsoup Version 1.9.2
+* com.atlassian.templaterenderer Version 3.0.0
+* com.google.guava Version 19.0
+* com.atlassian.plugin Version - Latest
+
+
+# Architecture
+lorem ipsum
+
 # Setup Environment (OSX)
 * Install Homebrew
 ```
