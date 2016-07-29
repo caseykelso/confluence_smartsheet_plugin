@@ -32,10 +32,13 @@
   </exec>
 </target>
 
-<target name="build_plugin">
+<target name="go" depends="build_smartsheet_connector, build_cli " >
+</target>
+
+<target name="build_plugin" depends="build_smartsheet_connector" >
  <delete dir="${build.dir}" />
  <delete dir="${basedir}/smartsheetplugin/target" />
- <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-compile" />
+ <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-package" />
 </target>
 
 <target name="build_smartsheet_connector">
@@ -46,7 +49,7 @@
   </exec>
 </target>
 
-<target name="build_cli">
+<target name="build_cli" depends="build_smartsheet_connector" >
   <exec failonerror="true" dir="${smartsheetcli.dir}" executable="mvn">
     <arg value="clean" />
     <arg value="package" />
