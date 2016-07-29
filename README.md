@@ -7,11 +7,11 @@ lorem ipsum
 # 3rd-Party Dependencies
 | Package | Version | Source |
 | ------- | ------- | ------ |
-| com.smartsheet.smartsheet-sdk-java | 2.0.4 | http |
-| org.jsoup.jsoup | 1.9.2 | http |
-| com.atlassian.templaterenderer | 3.0.0 | http |
-| com.google.guava | 19.0 | http |
-| com.atlassian.plugin | Latest | http |
+| com.smartsheet.smartsheet-sdk-java | 2.0.4 | [Github](https://github.com/smartsheet-platform/smartsheet-java-sdk) |
+| org.jsoup.jsoup | 1.9.2 | [Github](https://github.com/jhy/jsoup) |
+| com.atlassian.templaterenderer | 3.0.0 | [Atlassian](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project/set-up-the-sdk-prerequisites-for-linux-or-mac) |
+| com.google.guava | 19.0 | [Github](https://github.com/google/guava) |
+| com.atlassian.plugin | Latest | [Atlassian](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project/set-up-the-sdk-prerequisites-for-linux-or-mac) |
 
 
 # Architecture
