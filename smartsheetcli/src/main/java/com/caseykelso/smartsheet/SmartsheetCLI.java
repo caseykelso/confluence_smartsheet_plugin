@@ -28,11 +28,13 @@ import org.jsoup.parser.Tag;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.caseykelso.RESTClient;
+import com.caseykelso.smartsheet.RESTClientModdedCDN;
 
 
-public class SmartsheetCLI 
+public class SmartsheetCLI
 {
+
+
 
    public static Options setupCommandLine()
    {
@@ -62,10 +64,10 @@ public class SmartsheetCLI
 
     public static void main(String args[])
     {
-        Properties props           = null;
-        Options    options         = null;
-        CommandLine cl             = null;
-        RESTClient  client         = new RESTClient();
+        Properties          props           = null;
+        Options             options         = null;
+        CommandLine         cl              = null;
+        RESTClientModdedCDN client          = new RESTClientModdedCDN();
 
         options = setupCommandLine();
         CommandLineParser clparser = new DefaultParser();
