@@ -54,7 +54,7 @@
     <groupId>com.caseykelso.smartsheet</groupId>
     <artifactId>smartsheetrestclient</artifactId>
     <version>0.3-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <organization>
         <name>Casey Kelso</name>

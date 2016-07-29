@@ -1,13 +1,16 @@
 <project name="confluence_smartsheet_plugin" default="all" basedir=".">
-<property name="target.dir"            value="${basedir}/target" />
-<property name="build.dir"             value="${basedir}/build" />
-<property name="smartsheetcli.dir"     value="${basedir}/smartsheetcli" />
-<property name="plugin.dir"            value="${basedir}/smartsheetplugin" />
-<property name="smartsheetplugin.jar"  value="${plugin.dir}/target/smartsheetplugin-0.1.jar" />
-<property name="smartsheetcli.jar"     value="${smartsheetcli.dir}/target/smartsheetcli-0.3.jar" />
-<property name="jqwidget.dir"          value="${plugin.dir}/src/main/resources/js" />
+<property name="target.dir"              value="${basedir}/target" />
+<property name="build.dir"               value="${basedir}/build" />
+<property name="smartsheetcli.dir"       value="${basedir}/smartsheetcli" />
+<property name="plugin.dir"              value="${basedir}/smartsheetplugin" />
+<property name="smartsheetplugin.jar"    value="${plugin.dir}/target/smartsheetplugin-0.1.jar" />
+<property name="smartsheetcli.jar"       value="${smartsheetcli.dir}/target/smartsheetcli-0.3.jar" />
+<property name="jqwidget.dir"            value="${plugin.dir}/src/main/resources/js" />
+<property name="smartsheetconnector.dir" value="${basedir}/smartsheet" />
 
-<target name="all" depends="jqwidgets_unpack, smartsheet_sdk, build_plugin, package_plugin, package_target" >
+
+
+<target name="all" depends="jqwidgets_unpack, build_plugin, package_plugin" >
 </target>
 
 <target name="jqwidgets_unpack">
@@ -34,6 +37,16 @@
  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-compile" />
 </target>
 
+<target name="build_smartsheet_connector">
+  <exec failonerror="true" dir="${smartsheetconnector.dir}" executable="mvn">
+    <arg value="clean" />
+    <arg value="package" />
+    <arg value="install" />
+  </exec>
+</target>
+
+<target name="build_cli">
+</target>
 
 <target name="package_plugin" depends="build_plugin" >
  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-package" />
@@ -42,15 +55,8 @@
 <target name="plugin" depends="build_plugin, package_plugin" >
 </target>
 
-<target name="confluence" depends="package_plugin">
-  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-run">
-    <arg value="--jvmargs" />
-    <arg value="'-Xmx8192m" />
-    <arg value="-Xms4096m'" />
-  </exec>
-</target>
 
-<target name="run_tools" depends="package_target" >
+<target name="run_tools"  >
   <java jar="${target.dir}/target.jar"  fork="true">
   </java>  
 </target>
