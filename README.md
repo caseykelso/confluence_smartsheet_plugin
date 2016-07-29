@@ -2,7 +2,7 @@
 Confluence Plug-in connects Smartsheet &amp; Confluence
 
 # License
-lorem ipsum
+Apache 2.0 License - see LICENSE file
 
 # 3rd-Party Dependencies
 | Package | Version | Source |
