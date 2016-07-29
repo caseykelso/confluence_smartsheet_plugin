@@ -5,11 +5,13 @@ Confluence Plug-in connects Smartsheet &amp; Confluence
 lorem ipsum
 
 # 3rd-Party Dependencies
-* com.smartsheet.smartsheet-sdk-java Version 2.0.4
-* org.jsoup.jsoup Version 1.9.2
-* com.atlassian.templaterenderer Version 3.0.0
-* com.google.guava Version 19.0
-* com.atlassian.plugin Version - Latest
+| Package | Version | Source |
+| ------- | ------- | ------ |
+| com.smartsheet.smartsheet-sdk-java | 2.0.4 | http |
+| org.jsoup.jsoup | 1.9.2 | http |
+| com.atlassian.templaterenderer | 3.0.0 | http |
+| com.google.guava | 19.0 | http |
+| com.atlassian.plugin | Latest | http |
 
 
 # Architecture
