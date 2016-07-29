@@ -1,3 +1,3 @@
 #!/bin/sh
-java -jar target/target.jar -allsheets
+java -jar smartsheetcli/target/smartsheetcli-0.3-SNAPSHOT-jar-with-dependencies.jar  -allsheets
 

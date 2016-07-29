@@ -7,7 +7,8 @@
 <property name="smartsheetcli.jar"       value="${smartsheetcli.dir}/target/smartsheetcli-0.3.jar" />
 <property name="jqwidget.dir"            value="${plugin.dir}/src/main/resources/js" />
 <property name="smartsheetconnector.dir" value="${basedir}/smartsheet" />
-
+<property name="smartsheetcli.dir"       value="${basedir}/smartsheetcli" />
+<property name="cli.jar"                 value="${smartsheetcli.dir}/target/smartsheetcli-0.3-SNAPSHOT.jar" />
 
 
 <target name="all" depends="jqwidgets_unpack, build_plugin, package_plugin" >
@@ -46,7 +47,13 @@
 </target>
 
 <target name="build_cli">
+  <exec failonerror="true" dir="${smartsheetcli.dir}" executable="mvn">
+    <arg value="clean" />
+    <arg value="package" />
+    <arg value="install" />
+  </exec>
 </target>
+
 
 <target name="package_plugin" depends="build_plugin" >
  <exec failonerror="true" dir="${basedir}/smartsheetplugin" executable="atlas-package" />
