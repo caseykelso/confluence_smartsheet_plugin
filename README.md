@@ -20,6 +20,23 @@ Apache 2.0 License - see [LICENSE](https://github.com/caseykelso/confluence_smar
 # Architecture
 ![alt text](https://github.com/caseykelso/confluence_smartsheet_plugin/blob/master/documentation/confluence_smartsheet.png "Confluence Smartsheet Architecture")
 
+# Source Code
+* JavaDoc (TBD)
+| File       |  Description |
+| ---------- | ------------ |
+| pom.xml    | Maven project file |
+| README     | This documentation file | 
+| LICENSE    | Software license file - Apache v2.0 |
+| smartsheet.properties.example | smartsheet api token configuration file, rename to smartsheet.properties |
+| build.xml             | ANT build configuration for this project |
+| RESTClient.java       | Standalone RESTClient that wraps Smartsheet SDK calls and presents the final report |
+| SmartsheetCLI.java    | Command line interface for this project, standalone application for iterative incremental testing |
+| SmartsheetMacro.java  | Atlassian Macro implementation source code |
+| SmartsheetMacroServlet.java | Atlassian Macro administrator menu menu source code |
+| atlassian-plugin.xml        | Manifest for the Atlassian Macro Plug-in |
+
+
+
 # Setup Environment (OSX)
 ## Install Homebrew
 ```
