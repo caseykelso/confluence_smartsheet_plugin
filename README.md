@@ -23,8 +23,12 @@ brew install maven ant git
 # Setup Environment (Ubuntu/Debian/Mint Linux)
 * Install Tools & Dependencies
 ```
+sudo add-apt-repository ppa:webupd8team/java
+sudo sh -c 'echo "deb https://sdkrepo.atlassian.com/debian/ stable contrib" >>/etc/apt/sources.list'
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys B07804338C015B73
+sudo apt-get install apt-transport-https
 sudo apt-get update && sudo apt-get dist-upgrade
-sudo apt-get install maven ant git
+sudo apt-get install maven ant git atlassian-plugin-sdk oracle-java8-installer
 ```
 
 # Setup working copy
