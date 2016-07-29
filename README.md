@@ -15,7 +15,7 @@ Apache 2.0 License - see LICENSE file
 
 
 # Architecture
-lorem ipsum
+![alt text](https://github.com/caseykelso/confluence_smartsheet_plugin/blob/master/documentation/confluence_smartsheet.png "Confluence Smartsheet Architecture")
 
 # Setup Environment (OSX)
 ## Install Homebrew
