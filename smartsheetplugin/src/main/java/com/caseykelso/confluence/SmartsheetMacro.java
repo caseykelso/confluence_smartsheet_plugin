@@ -45,6 +45,7 @@ public class SmartsheetMacro implements Macro
 	private List<Integer> activeColumnIndexes; //TODO: refactor, use a class instance per macro execute
         private int           tagsColumn; //TODO: same as above
         private com.caseykelso.RESTClient client;
+        private boolean       isHideColumnHeaders;
 
 	public SmartsheetMacro() 
         {
@@ -118,6 +119,14 @@ public class SmartsheetMacro implements Macro
 		     activeColumnNames.add("all");
                  }
 
+                 if (parameters.containsKey("hide-column-headers") && parameters.get("hide-column-headers").equals("true"))
+                 {
+                     isHideColumnHeaders = true;
+                 }
+                 else
+                 {
+                     isHideColumnHeaders = false;
+                 }
 
 
                 String html = "";
@@ -132,7 +141,7 @@ public class SmartsheetMacro implements Macro
                        tagFilter = parameters.get("tag-filter");
                    }
 
-		   html = client.renderSheetHTML(client.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter, activeColumnNames);
+		   html = client.renderSheetHTML(client.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter, activeColumnNames, isHideColumnHeaders);
 		}
 		catch (Exception e)
 		{

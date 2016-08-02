@@ -240,9 +240,18 @@ catch (Exception e)
 
    private Element renderTable(Sheet s, String tagFilter, List<String> activeColumnNames)
    {
+       return renderTable(s, tagFilter, activeColumnNames, true);
+   }
+ 
+   private Element renderTable(Sheet s, String tagFilter, List<String> activeColumnNames, boolean isDisplayColumnHeaders)
+   {
       Element  table     = new Element(Tag.valueOf("table"), ""); 
       table.attr("class", "table table-striped table-hover");
-      table.appendChild(renderTableHeader(s, activeColumnNames));
+      
+      if (isDisplayColumnHeaders)
+      {
+         table.appendChild(renderTableHeader(s, activeColumnNames));
+      }
 
       List<Row> rows     = s.getRows(); 
 
@@ -270,8 +279,12 @@ catch (Exception e)
        return cdns;
    }
   
-   
    public String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames)
+   {  
+       return renderSheetHTML(s, tagFilter, activeColumnNames, true);
+   }
+   
+   public String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames, boolean isDisplayColumnHeader)
    {
         Document doc       = Document.createShell("");
         
@@ -282,7 +295,7 @@ catch (Exception e)
 
 //        Element  headline  = doc.appendElement("h1").text(s.getName());
         
-        doc.appendChild(renderTable(s, tagFilter, activeColumnNames)); // add table to html body
+        doc.appendChild(renderTable(s, tagFilter, activeColumnNames, isDisplayColumnHeader)); // add table to html body
 
         return doc.html();
    }
