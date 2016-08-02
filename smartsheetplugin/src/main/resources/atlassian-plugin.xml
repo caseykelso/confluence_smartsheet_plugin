@@ -21,6 +21,7 @@
           <parameter name="start-column"                              type="boolean"  default="false"  />
           <parameter name="finish-column"                             type="boolean"  default="false"  />
           <parameter name="all-column"                                type="boolean"  default="false"  />
+          <parameter name="hide-column-headers"                       type="boolean"  default="false" />
  
         </parameters>
     </xhtml-macro>
