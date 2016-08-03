@@ -11,7 +11,7 @@
 <property name="cli.jar"                 value="${smartsheetcli.dir}/target/smartsheetcli-0.3-SNAPSHOT.jar" />
 
 
-<target name="all" depends="jqwidgets_unpack, build_plugin, package_plugin" >
+<target name="all" depends="jqwidgets_unpack, build_plugin, package_plugin, build_cli" >
 </target>
 
 <target name="jqwidgets_unpack">

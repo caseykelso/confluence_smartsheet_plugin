@@ -41,6 +41,7 @@ public class SmartsheetCLI
        Options options = new Options();
        options.addOption("h", "help", false, "show help");  
 //       options.addOption("as", "allsheets", false, "show sheets");
+       options.addOption("c", "columns", false, "hide column headers");
        options.addOption("s", "sheet", true, "show sheet");
        return options;
    }
@@ -71,6 +72,8 @@ public class SmartsheetCLI
 
         options = setupCommandLine();
         CommandLineParser clparser = new DefaultParser();
+
+
         try
         {
             cl = clparser.parse(options, args);
@@ -78,6 +81,7 @@ public class SmartsheetCLI
         catch (ParseException e)
         {
             SmartsheetCLI.showHelp(options);
+            System.err.println("ParseException: "+ e.getMessage());
             System.exit(3); // change this to show help
         }
 
@@ -107,10 +111,25 @@ public class SmartsheetCLI
         {   
 		try 
 		{ 
+                   boolean hideColumns = false;
                    String html = "";
                    List<String> columns = new ArrayList<String>();
                    columns.add("all");
-		   html = client.renderSheetHTML(client.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))),"",columns);
+
+                   if (cl.hasOption("columns"))
+                   {
+                      hideColumns = true;
+//System.out.println("*****************hideColumns");
+ 
+                   }
+                   else
+                   {
+//System.out.println("*****************showColumns");
+                   }
+
+//System.out.println("*****************sheetCLI");
+ 
+		   html = client.renderSheetHTML(client.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))),"",columns, hideColumns);
                    System.out.println(html);
 		}
 		catch (Exception e)
@@ -119,7 +138,6 @@ public class SmartsheetCLI
 		   System.exit(2);
 		}
         } 
- 
         else if (cl.hasOption("help"))
         {
             SmartsheetCLI.showHelp(options);
