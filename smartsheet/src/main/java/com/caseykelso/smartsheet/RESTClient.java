@@ -203,7 +203,7 @@ catch (Exception e)
 
 
 
-   private Element renderTableHeader(Sheet s, List<String> activeColumnNames)
+   private Element renderTableHeader(Sheet s, List<String> activeColumnNames, boolean isHideColumnHeaders)
    {
 
       activeColumnIndexes = new ArrayList<Integer>();
@@ -227,7 +227,12 @@ catch (Exception e)
          {
 		 Element column = new Element(Tag.valueOf("th"), "");
 		 column.appendText(c.getTitle().toString());
-		 tableHeader.appendChild(column);
+
+                 if (!isHideColumnHeaders)
+                 {
+			 tableHeader.appendChild(column);
+                 }
+
                  activeColumnIndexes.add(new Integer(i));
          }
 
@@ -248,10 +253,7 @@ catch (Exception e)
       Element  table     = new Element(Tag.valueOf("table"), ""); 
       table.attr("class", "table table-striped table-hover");
       
-      if (!isHideColumnHeaders)
-      {
-         table.appendChild(renderTableHeader(s, activeColumnNames));
-      }
+      table.appendChild(renderTableHeader(s, activeColumnNames, isHideColumnHeaders));
 
       List<Row> rows     = s.getRows(); 
 

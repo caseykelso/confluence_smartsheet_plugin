@@ -78,59 +78,59 @@ public class SmartsheetMacro implements Macro
                  if (parameters.containsKey("tags-column") && parameters.get("tags-column").equals("true"))
                  {
 		     activeColumnNames.add("Tags");
-                     html += ("************tags-column");
+                     //html += ("************tags-column");
                  }
 
                  if (parameters.containsKey("status-column") && parameters.get("status-column").equals("true"))
                  {
 		     activeColumnNames.add("Status");
-                     html += ("************status-column");
+                     //html += ("************status-column");
  
                  }
 
                  if (parameters.containsKey("task-column") && parameters.get("task-column").equals("true"))
                  {
 		     activeColumnNames.add("Task Name");
-                     html += ("************task-column");
+                     //html += ("************task-column");
  
                  }
 
                  if (parameters.containsKey("ryg-column") && parameters.get("ryg-column").equals("true"))
                  {
 		     activeColumnNames.add("RYG");
-                     html += ("************ryg-column");
+                     //html += ("************ryg-column");
  
                  }
 
                  if (parameters.containsKey("comments-column") && parameters.get("comments-column").equals("true"))
                  {
 		     activeColumnNames.add("Comments");
-                     html += ("************comments-column");
+                     //html += ("************comments-column");
  
                  }
 
                  if (parameters.containsKey("start-column") && parameters.get("start-column").equals("true"))
                  {
 		     activeColumnNames.add("Start");
-                     html += ("************start-column");
+                     //html += ("************start-column");
                  }
 
                  if (parameters.containsKey("finish-column") && parameters.get("finish-column").equals("true"))
                  {
 		     activeColumnNames.add("Finish");
-                     html += ("************finish-column");
+                     //html += ("************finish-column");
                  }
 
                  if (parameters.containsKey("assigned-column") && parameters.get("assigned-column").equals("true"))
                  {
-                     html += ("************assigned-column");
+                     //html += ("************assigned-column");
 		     activeColumnNames.add("Assigned To");
                  }
 
                  if (parameters.containsKey("all-column") && parameters.get("all-column").equals("true"))
                  {
 		     activeColumnNames.add("all");
-                     html += ("************all-columns");
+                     //html += ("************all-columns");
  
                  }
 
@@ -138,7 +138,7 @@ public class SmartsheetMacro implements Macro
                  if (parameters.containsKey("hide-headers") && parameters.get("hide-headers").equals("true"))
                  {
                      isHideColumnHeaders = true;
-                     html += ("************hide-headers");
+                     //html += ("************hide-headers");
                  }
 
 
@@ -150,7 +150,7 @@ public class SmartsheetMacro implements Macro
                    if (parameters.containsKey("tag-filter"))
                    {
                        tagFilter = parameters.get("tag-filter");
-                       html += ("************tag-filter: "+ tagFilter);
+                       //html += ("************tag-filter: "+ tagFilter);
                    }
 
 		   html += client.renderSheetHTML(client.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter, activeColumnNames, isHideColumnHeaders);
@@ -158,7 +158,7 @@ public class SmartsheetMacro implements Macro
 		catch (Exception e)
 		{
 		   System.err.println("SmartSheetException: " + e.getMessage()); 
-                   html += ("SmartSheetException: " + e.getMessage());
+                   //html += ("SmartSheetException: " + e.getMessage());
 		} 
 
                 return html;

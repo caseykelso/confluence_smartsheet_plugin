@@ -43,7 +43,7 @@
 
 <target name="build_smartsheet_connector">
   <exec failonerror="true" dir="${smartsheetconnector.dir}" executable="mvn">
-    <arg value="clean" />
+    <arg value="clean" /> 
     <arg value="package" />
     <arg value="install" />
   </exec>
