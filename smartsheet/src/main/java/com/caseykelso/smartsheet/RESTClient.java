@@ -284,7 +284,17 @@ catch (Exception e)
        + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">"
        + "<!-- Optional theme -->"
        + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
-       + "</script>";
+       + "<link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqx.base.css\" crossorigin=\"anonymous\">"
+
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxcore.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxdata.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxbuttons.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxscrollbar.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxmenu.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.selection.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.filter.js\" crossorigin=\"anonymous\"></script>"
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.sort.js\" crossorigin=\"anonymous\"></script>";
        return cdns;
    }
   
