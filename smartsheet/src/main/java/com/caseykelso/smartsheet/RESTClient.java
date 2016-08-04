@@ -120,7 +120,7 @@ catch (Exception e)
 	
 }
                      Element image = new Element(Tag.valueOf("img"), "");
-                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/green.png");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/green_rev2.png");
                      image.attr("width", "25");
                      column.appendChild(image);
 //                     column.appendChild(link);
@@ -129,14 +129,21 @@ catch (Exception e)
                  else if (smartsheetCell.getValue().toString().equals("Yellow"))
                  {
                      Element image = new Element(Tag.valueOf("img"), "");
-                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/yellow.png");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/yellow_rev2.png");
                      image.attr("width", "25");
                      column.appendChild(image);
                  }
                  else if (smartsheetCell.getValue().toString().equals("Red"))
                  { 
                      Element image = new Element(Tag.valueOf("img"), "");
-                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/red.png");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/red_rev2.png");
+                     image.attr("width", "25");
+                     column.appendChild(image);
+                 } 
+                 else if (smartsheetCell.getValue().toString().equals("Blue"))
+                 { 
+                     Element image = new Element(Tag.valueOf("img"), "");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/blue_rev2.png");
                      image.attr("width", "25");
                      column.appendChild(image);
                  } 
