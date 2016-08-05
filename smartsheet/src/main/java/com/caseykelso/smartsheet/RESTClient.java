@@ -70,6 +70,142 @@ public class RESTClient
        return "placeholder";
    }
 
+   private Element extractGanttRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
+   {
+      
+      Element  row                = new Element(Tag.valueOf("tr"), "");  
+      row.attr("scope", "row");
+
+      try {
+      List<Cell> smartsheetCells  = smartsheetRow.getCells();
+
+      int i = 0;
+
+      for (Cell smartsheetCell : smartsheetCells)
+      {
+          
+            // filter row on tag column
+            if ((i == tagsColumn) && !tagFilter.equals(""))
+            {
+               if (null == smartsheetCell.getValue().toString())
+               {
+                  return null; //TODO: Refactor to remove multiple returns
+               }
+               else if (-1 == smartsheetCell.getValue().toString().indexOf(tagFilter))
+               {
+                  return null; //TODO: Refactor to remove multiple returns
+               }
+
+           }
+
+         // render active columns
+         if (activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
+         {
+             Element  column    = new Element(Tag.valueOf("td"), "");
+
+	     if (null != smartsheetCell.getValue())
+	     {
+                 if (smartsheetCell.getValue().toString().equals("Green"))
+                 {
+                     Element link = new Element(Tag.valueOf("a"), "");
+try {
+//                     link.attr("href", smartsheetRow.getPermalink());
+}
+catch (Exception e)
+{
+    e.printStackTrace();
+	
+}
+                     Element image = new Element(Tag.valueOf("img"), "");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/green_rev2.png");
+                     image.attr("width", "25");
+                     column.appendChild(image);
+//                     column.appendChild(link);
+//TODO: render link from confluence back to the smartsheet row
+                 }
+                 else if (smartsheetCell.getValue().toString().equals("Yellow"))
+                 {
+                     Element image = new Element(Tag.valueOf("img"), "");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/yellow_rev2.png");
+                     image.attr("width", "25");
+                     column.appendChild(image);
+                 }
+                 else if (smartsheetCell.getValue().toString().equals("Red"))
+                 { 
+                     Element image = new Element(Tag.valueOf("img"), "");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/red_rev2.png");
+                     image.attr("width", "25");
+                     column.appendChild(image);
+                 } 
+                 else if (smartsheetCell.getValue().toString().equals("Blue"))
+                 { 
+                     Element image = new Element(Tag.valueOf("img"), "");
+                     image.attr("src", "https://s3.amazonaws.com/caseykelso-smartsheetplugin/blue_rev2.png");
+                     image.attr("width", "25");
+                     column.appendChild(image);
+                 } 
+                 else if (ColumnType.CHECKBOX              == smartsheetCell.getColumnType() || 
+                          ColumnType.PICKLIST              == smartsheetCell.getColumnType() || 
+                          ColumnType.TEXT_NUMBER           == smartsheetCell.getColumnType() || 
+                          ColumnType.PREDECESSOR           == smartsheetCell.getColumnType() || 
+                          ColumnType.CONTACT_LIST          == smartsheetCell.getColumnType() || 
+                          ColumnType.DURATION              == smartsheetCell.getColumnType() )
+                 {
+                 }
+ 
+                 else if (ColumnType.DATE              == smartsheetCell.getColumnType() || 
+                          ColumnType.DATETIME          == smartsheetCell.getColumnType() || 
+                          ColumnType.ABSTRACT_DATETIME == smartsheetCell.getColumnType() )
+                 {
+
+                        try
+                        {
+
+		            SimpleDateFormat sourceDateFormat = new SimpleDateFormat("yyyy-MM-DDTHH:mm:ss");
+		            Date date = sourceDateFormat.parse(smartsheetCell.getValue().toString());
+			    SimpleDateFormat targetDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   			    System.out.println(targetDateFormat.format(date));
+   	                }
+                        catch(ParseException e) 
+                        {
+			    e.printStackTrace();
+			}
+			   
+                 }
+                 else 
+                 {
+                     try 
+                     {
+		        column.appendText(smartsheetCell.getDisplayValue());
+                     }
+                     catch (Exception e)
+                     {
+        	        column.appendText(smartsheetCell.getValue().toString());
+                     }
+
+                 }
+	     }
+	     else
+	     {
+	       column.html("&nbsp;");
+	     }
+
+
+      	    row.appendChild(column);       // add column to row
+      }
+           i++;
+ 
+      } 
+      }
+      catch(Exception e)
+      {
+          row = null;
+      }
+ 
+      return row; 
+   }
+
+
 //TODO: migrate to jqxTreeGrid for hierarchical grid
 //http://www.jqwidgets.com/jquery-widgets-demo/mobiledemos/jqxtreegrid/index.htm#demos/jqxtreegrid/treegrid.htm
 //free for opensource
@@ -277,30 +413,93 @@ catch (Exception e)
       return table;
    }
 
+   public String renderGanttRow(Row r, int rowID, String tagFilter)
+   {
+     String result = "";
+
+     if (1 != rowID) // if not first row, add a comma delimeter to separate from the previous row
+     {
+        result += ",";
+     }
+
+     result += "{id:"+rowID+", text:\"blah\", start_date:\"01-04-2013\", duration:18, order:10, progress:0.5, open: true}\n";
+     
+/*
+                {id:1, text:"Project #2", start_date:"01-04-2013", duration:18,order:10,
+                    progress:0.4, open: true},
+                {id:2, text:"Task #1", 	  start_date:"02-04-2013", duration:8, order:10,
+                    progress:0.6, parent:1},
+                {id:3, text:"Task #2",    start_date:"11-04-2013", duration:8, order:20,
+                    progress:0.6, parent:1}
+*/
+     return result;
+   }
+
+   public String renderGantt(Sheet s, String tagFilter)
+   {
+
+      String html = "";
+
+        html += "<body>\n";
+        html += "<div id=\"gantt_here\" style='width:100%; height:100%;'></div>\n";
+
+        // start of script
+	html += "<script type=\"text/javascript\">\n";
+
+        // start of tasks json container
+        html += "var tasks =  {"
+        + "    data:[\n";
+
+      List<Row> rows = s.getRows();
+
+      int rowID = 1;
+
+      for (Row r : rows)
+      {
+         html += renderGanttRow(r, rowID, tagFilter);  
+         ++rowID;
+      }
+
+       // end of tasks json container
+       html += "     ]\n"
+       + "};\n";
+
+      html += "$(function() {";
+      html += "console.log( \"ready!\" );";
+      html += "gantt.init(\"gantt_here\");\n";
+      html += "gantt.parse(tasks);\n"; 
+      html += "});";
+
+      //end of script tag
+      html += "</script>\n";
+  
+      html += "</body>";
+
+      return html;
+   }
+
    public String renderGanttCDNs()
    { 
       String cdns = ""
-       + "<!-- Latest compiled and minified CSS -->"
-       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">"
-       + "<!-- Optional theme -->"
-       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
-      + "<link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/dhtmlxgantt4.0.0/dhtmlxgantt.css\" type=\"text/css\" media=\"screen\" title=\"no title\" charset=\"utf-8\" crossorigin=\"anonymous\">"
-      + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/dhtmlxgantt4.0.0/dhtmlxgantt.js\" crossorigin=\"anonymous\"></script>"
-      + "<style type=\"text/css\">"
-      + "html, body{ height:100%; padding:0px; margin:0px; overflow: hidden;}"
-      + "</style>";
+       + "<script   src=\"https://code.jquery.com/jquery-2.2.4.min.js\"   integrity=\"sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=\"   crossorigin=\"anonymous\"></script>\n"
+       + "<!-- Latest compiled and minified CSS -->\n"
+      + "<link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/dhtmlxgantt4.0.0/dhtmlxgantt.css\" type=\"text/css\" media=\"screen\" title=\"no title\" charset=\"utf-8\" >\n"
+      + "<script charset=\"utf-8\" type=\"text/javascript\" src=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/dhtmlxgantt4.0.0/dhtmlxgantt.js\" >\n</script>\n"
+      + "<style type=\"text/css\">\n"
+      + "html, body{ height:100%; padding:0px; margin:0px; overflow: hidden;}\n"
+      + "</style>\n";
 
       return cdns;
    }
 
    public String renderCDNs()
    {
-       String cdns = ""
+       String cdns = "<head>"
        + "<!-- Latest compiled and minified CSS -->"
-       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">"
-       + "<!-- Optional theme -->"
-       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
-       + "<link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqx.base.css\" crossorigin=\"anonymous\">"
+       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">\n"
+       + "<!-- Optional theme -->\n"
+       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">\n"
+       + "<link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqx.base.css\" crossorigin=\"anonymous\">\n"
 
        + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxcore.js\" crossorigin=\"anonymous\"></script>"
        + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxdata.js\" crossorigin=\"anonymous\"></script>"
@@ -310,16 +509,27 @@ catch (Exception e)
        + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.js\" crossorigin=\"anonymous\"></script>"
        + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.selection.js\" crossorigin=\"anonymous\"></script>"
        + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.filter.js\" crossorigin=\"anonymous\"></script>"
-       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.sort.js\" crossorigin=\"anonymous\"></script>";
+       + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/jqwidgets/jqxgrid.sort.js\" crossorigin=\"anonymous\"></script></head>";
        return cdns;
    }
+
+
+   public String renderSheetGanttHTML(Sheet s, String tagFilter)
+   {
+       String html = "<html>";
+       html += renderGanttCDNs();
+       html += renderGantt(s, tagFilter);
+       html += "</html>";
+
+       return html;
+   }
   
-   public String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames)
+   public String renderSheetTableHTML(Sheet s, String tagFilter, List<String> activeColumnNames)
    {  
-       return renderSheetHTML(s, tagFilter, activeColumnNames, true);
+       return renderSheetTableHTML(s, tagFilter, activeColumnNames, true);
    }
    
-   public String renderSheetHTML(Sheet s, String tagFilter, List<String> activeColumnNames, boolean isHideColumnHeaders)
+   public String renderSheetTableHTML(Sheet s, String tagFilter, List<String> activeColumnNames, boolean isHideColumnHeaders)
    {
         Document doc       = Document.createShell("");
         

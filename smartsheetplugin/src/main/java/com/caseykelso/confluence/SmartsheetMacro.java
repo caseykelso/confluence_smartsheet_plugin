@@ -153,7 +153,7 @@ public class SmartsheetMacro implements Macro
                        //html += ("************tag-filter: "+ tagFilter);
                    }
 
-		   html += client.renderSheetHTML(client.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter, activeColumnNames, isHideColumnHeaders);
+		   html += client.renderSheetTableHTML(client.getSheet(parameters.get("api-token"), Long.valueOf(sheetID)), tagFilter, activeColumnNames, isHideColumnHeaders);
 		}
 		catch (Exception e)
 		{

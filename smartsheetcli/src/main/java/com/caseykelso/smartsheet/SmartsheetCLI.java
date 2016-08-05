@@ -43,6 +43,8 @@ public class SmartsheetCLI
 //       options.addOption("as", "allsheets", false, "show sheets");
        options.addOption("c", "columns", false, "hide column headers");
        options.addOption("s", "sheet", true, "show sheet");
+       options.addOption("g", "gantt", false, "render gantt chart");
+       options.addOption("t", "table", false, "render table (default)");
        return options;
    }
 
@@ -128,8 +130,16 @@ public class SmartsheetCLI
                    }
 
 //System.out.println("*****************sheetCLI");
- 
-		   html = client.renderSheetHTML(client.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))),"",columns, hideColumns);
+
+                   if (cl.hasOption("gantt"))
+                   {
+		       html = client.renderSheetGanttHTML(client.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))),"");
+                   }
+                   else
+                   { 
+		       html = client.renderSheetTableHTML(client.getSheet(props.getProperty("apitoken"), Long.valueOf(cl.getOptionValue("sheet"))),"",columns, hideColumns);
+                   } 
+
                    System.out.println(html);
 		}
 		catch (Exception e)
