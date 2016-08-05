@@ -277,6 +277,22 @@ catch (Exception e)
       return table;
    }
 
+   public String renderGanttCDNs()
+   { 
+      String cdns = ""
+       + "<!-- Latest compiled and minified CSS -->"
+       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">"
+       + "<!-- Optional theme -->"
+       + "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">"
+      + "<link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/dhtmlxgantt4.0.0/dhtmlxgantt.css\" type=\"text/css\" media=\"screen\" title=\"no title\" charset=\"utf-8\" crossorigin=\"anonymous\">"
+      + "<script type=\"text/javacript\" href=\"https://s3.amazonaws.com/caseykelso-smartsheetplugin/dhtmlxgantt4.0.0/dhtmlxgantt.js\" crossorigin=\"anonymous\"></script>"
+      + "<style type=\"text/css\">"
+      + "html, body{ height:100%; padding:0px; margin:0px; overflow: hidden;}"
+      + "</style>";
+
+      return cdns;
+   }
+
    public String renderCDNs()
    {
        String cdns = ""
