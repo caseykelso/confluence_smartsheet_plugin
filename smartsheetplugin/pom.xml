@@ -67,7 +67,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.mutex.confluence</groupId>
     <artifactId>smartsheetplugin</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.31-SNAPSHOT</version>
     <organization>
         <name>Casey Kelso</name>
         <url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
