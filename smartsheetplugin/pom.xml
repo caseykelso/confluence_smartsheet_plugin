@@ -65,7 +65,7 @@
         </pluginRepository>
     </pluginRepositories>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.caseykelso.confluence</groupId>
+    <groupId>io.mutex.confluence</groupId>
     <artifactId>smartsheetplugin</artifactId>
     <version>0.3-SNAPSHOT</version>
     <organization>
@@ -73,7 +73,7 @@
         <url>https://github.com/caseykelso/confluence_smartsheet_plugin</url>
     </organization>
     <name>smartsheetplugin</name>
-    <description>This is the com.caseykelso.confluence:smartsheetplugin plugin for Atlassian Confluence.</description>
+    <description>This is the io.mutex.confluence:smartsheetplugin plugin for Atlassian Confluence.</description>
     <packaging>atlassian-plugin</packaging>
     <issueManagement>
         <url>https://github.com/kevinsawicki/github-maven-example/issues</url>
@@ -124,7 +124,7 @@
 	</dependency>
 -->
        <dependency>
-            <groupId>com.caseykelso.smartsheet</groupId>
+            <groupId>io.mutex.smartsheet</groupId>
             <artifactId>smartsheetrestclient</artifactId>
             <version>0.3-SNAPSHOT</version>
             <scope>compile</scope>
@@ -217,7 +217,7 @@
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <!-- Add package to export here -->
-                        <Export-Package>com.caseykelso.confluence.api,</Export-Package>
+                        <Export-Package>io.mutex.confluence.api,</Export-Package>
                         <!-- Add package import here -->
                         <Import-Package>org.springframework.osgi.*;resolution:="optional", org.eclipse.gemini.blueprint.*;resolution:="optional", *</Import-Package>
                         <!-- Ensure plugin is spring powered -->

@@ -1,5 +1,5 @@
-package com.caseykelso.smartsheet;
-import com.caseykelso.RESTClient;
+package io.mutex.smartsheet;
+import io.mutex.RESTClient;
 
 public class RESTClientModdedCDN extends RESTClient
 {

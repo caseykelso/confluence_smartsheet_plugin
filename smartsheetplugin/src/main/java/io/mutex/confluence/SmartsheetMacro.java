@@ -1,4 +1,4 @@
-package com.caseykelso.confluence;
+package io.mutex.confluence;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.text.ParseException;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.caseykelso.RESTClient;
+import io.mutex.RESTClient;
 
 
 
@@ -43,7 +43,7 @@ public class SmartsheetMacro implements Macro
 {
 
 	private List<Integer> activeColumnIndexes; //TODO: refactor, use a class instance per macro execute
-        private com.caseykelso.RESTClient client;
+        private io.mutex.RESTClient client;
 
 	public SmartsheetMacro() 
         {

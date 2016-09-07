@@ -1,4 +1,4 @@
-package com.caseykelso.smartsheet;
+package io.mutex.smartsheet;
 import com.smartsheet.api.*;
 import com.smartsheet.api.models.*;
 import com.smartsheet.api.models.enums.SourceInclusion;
@@ -28,7 +28,7 @@ import org.jsoup.parser.Tag;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.caseykelso.smartsheet.RESTClientModdedCDN;
+import io.mutex.smartsheet.RESTClientModdedCDN;
 
 
 public class SmartsheetCLI

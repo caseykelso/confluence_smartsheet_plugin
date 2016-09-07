@@ -7,7 +7,7 @@
         <param name="plugin-logo">images/pluginLogo.png</param>
     </plugin-info>
 
-    <xhtml-macro name="confluence-smartsheet-macro" class="com.caseykelso.confluence.SmartsheetMacro" key="smartsheet">
+    <xhtml-macro name="confluence-smartsheet-macro" class="io.mutex.confluence.SmartsheetMacro" key="smartsheet">
         <parameters>
           <parameter name="api-token"                                 type="string"  required="true"  alias="api-token"/>
           <parameter name="sheet-id"                                  type="string"  required="true"  alias="sheet-id" />

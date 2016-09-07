@@ -51,7 +51,7 @@
  
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.caseykelso.smartsheet</groupId>
+    <groupId>io.mutex.smartsheet</groupId>
     <artifactId>smartsheetcli</artifactId>
     <version>0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -62,7 +62,7 @@
     </organization>
 
     <name>smartsheet</name>
-    <description>com.caseykelso.smartsheet.SmartsheetCLI class</description>
+    <description>io.mutex.smartsheet.SmartsheetCLI class</description>
     <!--<packaging>atlassian-plugin</packaging> -->
 
 
@@ -85,7 +85,7 @@
 	</dependency>
 
        <dependency>
-            <groupId>com.caseykelso.smartsheet</groupId>
+            <groupId>io.mutex.smartsheet</groupId>
             <artifactId>smartsheetrestclient</artifactId>
             <version>0.3-SNAPSHOT</version>
             <scope>compile</scope>
@@ -146,7 +146,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.caseykelso.smartsheet.SmartsheetCLI</mainClass>
+							<mainClass>io.mutex.smartsheet.SmartsheetCLI</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
@@ -161,7 +161,7 @@
 			<configuration>
 			  <archive>
 			    <manifest>
-			      <mainClass>com.caseykelso.smartsheet.SmartsheetCLI</mainClass>
+			      <mainClass>io.mutex.smartsheet.SmartsheetCLI</mainClass>
 			    </manifest>
 			  </archive>
 			  <descriptorRefs>
