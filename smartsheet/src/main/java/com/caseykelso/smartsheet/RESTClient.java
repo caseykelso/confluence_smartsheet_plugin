@@ -70,11 +70,10 @@ public class RESTClient
        return "placeholder";
    }
 
-   private Element extractGanttRow(Row smartsheetRow, String tagFilter,  List<String> activeColumnNames)
+   private String extractGanttRow(Row smartsheetRow, String tagFilter)
    {
-      
-      Element  row                = new Element(Tag.valueOf("tr"), "");  
-      row.attr("scope", "row");
+     
+      String row = ""; 
 
       try {
       List<Cell> smartsheetCells  = smartsheetRow.getCells();
@@ -99,7 +98,7 @@ public class RESTClient
            }
 
          // render active columns
-         if (activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
+         if (true) //activeColumnNames.contains("all") || activeColumnIndexes.contains(new Integer(i)))
          {
              Element  column    = new Element(Tag.valueOf("td"), "");
 
@@ -151,6 +150,7 @@ catch (Exception e)
                           ColumnType.CONTACT_LIST          == smartsheetCell.getColumnType() || 
                           ColumnType.DURATION              == smartsheetCell.getColumnType() )
                  {
+                    row += " duration:"+smartsheetCell.getValue().toString();
                  }
  
                  else if (ColumnType.DATE              == smartsheetCell.getColumnType() || 
@@ -191,7 +191,7 @@ catch (Exception e)
 	     }
 
 
-      	    row.appendChild(column);       // add column to row
+      	    //row.appendChild(column);       // add column to row
       }
            i++;
  
@@ -422,7 +422,9 @@ catch (Exception e)
         result += ",";
      }
 
-     result += "{id:"+rowID+", text:\"blah\", start_date:\"01-04-2013\", duration:18, order:10, progress:0.5, open: true}\n";
+     String extracted = extractGanttRow(r, tagFilter);
+
+     result += "{id:"+rowID+", text:\"blah\", start_date:\"01-04-2013\", "+extracted+", order:10, progress:0.5, open: true}\n";
      
 /*
                 {id:1, text:"Project #2", start_date:"01-04-2013", duration:18,order:10,
