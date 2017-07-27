@@ -68,14 +68,6 @@ sudo apt-get update && sudo apt-get dist-upgrade
 sudo apt-get install maven ant git atlassian-plugin-sdk oracle-java8-installer
 ```
 
-# Setup working copy
-```
-mkdir confluence_smartsheet
-cd confluence_smartsheet
-repo init -m smartsheetplugin.xml -u git://github.com/caseykelso/confluence_smartsheet_plugin
-repo sync
-```
-
 # Build CLI Tool & Plug-in
 ant all
 
